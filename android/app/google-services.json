@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "98256588908",
+    "firebase_url": "https://bank-management-45848.firebaseio.com",
+    "project_id": "bank-management-45848",
+    "storage_bucket": "bank-management-45848.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98256588908:android:ad7a53d140c9e821",
+        "android_client_info": {
+          "package_name": "com.example.bank_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98256588908-omm11p1ga5fk0qd8dcjovnkjn2172re0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bank_management",
+            "certificate_hash": "15d1d7456f7e5da6c40116bc654f50b9c799fbf0"
+          }
+        },
+        {
+          "client_id": "98256588908-l4eln8hjhos9has5s43f7re8aekisgs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOyEp1-6Bu6FVepV3XXwOyGS84xqu8j-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98256588908-l4eln8hjhos9has5s43f7re8aekisgs4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
