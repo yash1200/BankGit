@@ -84,4 +84,16 @@ void registerUser(User user) {
     'email': user.email,
     'uid': user.uid,
   });
+  Firestore.instance
+      .collection('users')
+      .document(user.uid)
+      .collection('branches')
+      .document('master')
+      .setData({
+    'balance': 0,
+    'transactions': 0,
+    'time': DateTime
+        .now()
+        .millisecondsSinceEpoch,
+  });
 }
