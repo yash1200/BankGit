@@ -1,0 +1,111 @@
+import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
+import 'package:bank_management/utils/Style.dart';
+import 'package:flutter/material.dart';
+
+class Branches extends StatefulWidget {
+  @override
+  _BranchesState createState() => _BranchesState();
+}
+
+class _BranchesState extends State<Branches> {
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: darkColor,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          'Menu',
+          style: TextStyle(
+            color: darkColor,
+          ),
+        ),
+      ),
+      body: FutureBuilder(
+        future: getBranches(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Your Branches',
+                      style: TextStyle(
+                        color: darkColor,
+                        fontSize: size.height / 22,
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height / 20,
+                    ),
+                    GridView.builder(
+                      itemCount: snapshot.data.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          width: size.width / 2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: grads[index],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Image.asset(
+                                'assets/circuit.png',
+                                height: size.height / 10,
+                                width: size.height / 10,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                snapshot.data[index].documentID,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
+    );
+  }
+}

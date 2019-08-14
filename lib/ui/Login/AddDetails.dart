@@ -70,7 +70,7 @@ class _AddDetailsState extends State<AddDetails> {
                       children: <Widget>[
                         TextFormField(
                           decoration: InputDecoration(
-                            hintText: 'Your Name',
+                            labelText: 'Your Name',
                           ),
                           textCapitalization: TextCapitalization.words,
                           controller: nameController,
@@ -83,15 +83,13 @@ class _AddDetailsState extends State<AddDetails> {
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                            hintText: 'Your Email',
-                            labelText: 'xyz@example.com',
+                            labelText: 'Your Email',
+                            hintText: 'xyz@example.com',
                           ),
                           controller: emailController,
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Email can\'be empty';
-                            } else if (RegExp(p).hasMatch(value)) {
-                              return 'Invalid Email';
                             }
                             return null;
                           },

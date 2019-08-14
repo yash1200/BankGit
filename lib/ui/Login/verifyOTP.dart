@@ -89,8 +89,8 @@ class _VerifyOtpState extends State<VerifyOtp> {
                     isLoading: isLoading,
                     textField: TextFormField(
                       decoration: InputDecoration(
-                        hintText: 'Enter OTP',
-                        labelText: 'XXXXXX',
+                        labelText: 'Enter OTP',
+                        hintText: 'XXXXXX',
                       ),
                       controller: otpController,
                       keyboardType: TextInputType.number,

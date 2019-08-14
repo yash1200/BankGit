@@ -83,12 +83,13 @@ void registerUser(User user) {
     'phone': user.phoneNumber,
     'email': user.email,
     'uid': user.uid,
+    'branches': 1,
   });
   Firestore.instance
       .collection('users')
       .document(user.uid)
       .collection('branches')
-      .document('master')
+      .document('Master')
       .setData({
     'balance': 0,
     'transactions': 0,
@@ -96,4 +97,27 @@ void registerUser(User user) {
         .now()
         .millisecondsSinceEpoch,
   });
+}
+
+Future<User> getUserDetails() async {
+  DocumentSnapshot documentSnapshot = await Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .get();
+  User user = User(
+    documentSnapshot.data['name'],
+    documentSnapshot.data['uid'],
+    documentSnapshot.data['phone'],
+    documentSnapshot.data['email'],
+  );
+  return user;
+}
+
+Future<List<DocumentSnapshot>> getBranches() async {
+  QuerySnapshot querySnapshot = await Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .collection('branches')
+      .getDocuments();
+  return querySnapshot.documents;
 }

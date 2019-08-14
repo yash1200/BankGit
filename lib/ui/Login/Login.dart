@@ -38,8 +38,8 @@ class _LoginState extends State<Login> {
                     isLoading: isLoading,
                     textField: TextFormField(
                       decoration: InputDecoration(
-                        hintText: 'Phone Number',
-                        labelText: '98XXXXXXXX',
+                        labelText: 'Phone Number',
+                        hintText: '98XXXXXXXX',
                       ),
                       controller: phoneNumberController,
                       keyboardType: TextInputType.number,

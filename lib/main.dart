@@ -1,3 +1,4 @@
+import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/HomePage.dart';
 import 'package:bank_management/ui/Login/Login.dart';
 import 'package:bank_management/utils/Style.dart';
@@ -11,8 +12,15 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<LoginProvider>(
-      builder: (_) => LoginProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<LoginProvider>(
+          builder: (_) => LoginProvider(),
+        ),
+        ChangeNotifierProvider<AppProvider>(
+          builder: (_) => AppProvider(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Bank Management',
         debugShowCheckedModeBanner: false,
@@ -22,7 +30,7 @@ class MyApp extends StatelessWidget {
         home: FutureBuilder(
           future: FirebaseAuth.instance.currentUser(),
           builder: (context, snapshot) {
-            if (snapshot.data!=null) {
+            if (snapshot.data != null) {
               return HomePage();
             } else {
               return Login();
