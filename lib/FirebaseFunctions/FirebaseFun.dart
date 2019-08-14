@@ -1,5 +1,7 @@
+import 'package:bank_management/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:bank_management/provider/LoginProvider.dart';
 
@@ -10,7 +12,8 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
   print(phone);
   final PhoneVerificationCompleted verificationCompleted =
       (AuthCredential phoneAuthCredential) {
-    //_auth.signInWithCredential(phoneAuthCredential);
+    _auth.signInWithCredential(phoneAuthCredential);
+    provider.setIsLoggedIn(true);
   };
 
   final PhoneVerificationFailed verificationFailed =
@@ -24,7 +27,6 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
 
   final PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
       (String verificationId) {
-    print('Failed..');
     _verificationId = verificationId;
   };
 
@@ -40,22 +42,46 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
 
 Future<bool> signInWithPhoneNumber(
     String otp, String verificationId, BuildContext context) async {
-  print('Otp is: $otp');
-  print('Verification id $verificationId');
-  final AuthCredential credential = PhoneAuthProvider.getCredential(
-    verificationId: verificationId,
-    smsCode: otp,
-  );
-  print('reached');
-  AuthResult authResult =
-      await FirebaseAuth.instance.signInWithCredential(credential);
-  var user = authResult.user;
-  print('user is ${user.uid}');
-  final FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
-  assert(user.uid == currentUser.uid);
-  if (user != null) {
-    return true;
-  } else {
-    return false;
+  try {
+    final AuthCredential credential = PhoneAuthProvider.getCredential(
+      verificationId: verificationId,
+      smsCode: otp,
+    );
+    AuthResult authResult =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    FirebaseUser user = authResult.user;
+    final FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
+    assert(user.uid == currentUser.uid);
+    if (user != null) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    print(e);
+    print('Failed');
   }
+}
+
+Future<String> getUid() async {
+  return await FirebaseAuth.instance.currentUser().then((user) {
+    return user.uid;
+  });
+}
+
+Future<bool> isUserPresent() async {
+  DocumentSnapshot documentSnapshot = await Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .get();
+  return documentSnapshot.exists;
+}
+
+void registerUser(User user) {
+  Firestore.instance.collection('users').document(user.uid).setData({
+    'name': user.name,
+    'phone': user.phoneNumber,
+    'email': user.email,
+    'uid': user.uid,
+  });
 }

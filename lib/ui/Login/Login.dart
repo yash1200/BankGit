@@ -2,11 +2,7 @@ import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/ui/Login/verifyOTP.dart';
 import 'package:bank_management/ui/Widgets/CustomPaint.dart';
 import 'package:bank_management/ui/Login/loginWidget.dart';
-import 'package:bank_management/utils/Style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../HomePage.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -26,7 +22,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Form(
       key: fkey,
       child: SafeArea(
@@ -56,18 +51,20 @@ class _LoginState extends State<Login> {
                       },
                     ),
                     onTap: () {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      verifyPhoneNumber(phoneNumberController.text, context);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return VerifyOtp();
-                          },
-                        ),
-                      );
+                      if(fkey.currentState.validate()){
+                        setState(() {
+                          isLoading = true;
+                        });
+                        verifyPhoneNumber(phoneNumberController.text, context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return VerifyOtp(phoneNumberController.text);
+                            },
+                          ),
+                        );
+                      }
                     },
                   ),
                 ),

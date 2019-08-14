@@ -6,8 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../HomePage.dart';
+import 'AddDetails.dart';
 
 class VerifyOtp extends StatefulWidget {
+  String phoneNumber;
+
+  VerifyOtp(this.phoneNumber);
+
   @override
   _VerifyOtpState createState() => _VerifyOtpState();
 }
@@ -18,9 +23,56 @@ class _VerifyOtpState extends State<VerifyOtp> {
   bool isLoading = false;
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    final provider = Provider.of<LoginProvider>(context);
+    if (provider.getIsLoggedIn) {
+      setState(() {
+        otpController.text = 'Code Added';
+      });
+      enterOTP(context);
+    }
+  }
+
+  enterOTP(BuildContext context) {
+    final provider = Provider.of<LoginProvider>(context);
+    print(provider.getVerificationId);
+    setState(() {
+      isLoading = true;
+    });
+    signInWithPhoneNumber(
+      otpController.text,
+      provider.getVerificationId,
+      context,
+    ).then((value) {
+      if (value) {
+        if (isUserPresent() == true) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return HomePage();
+              },
+            ),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return AddDetails(widget.phoneNumber);
+              },
+            ),
+          );
+        }
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final provider = Provider.of<LoginProvider>(context);
-    var size = MediaQuery.of(context).size;
     return Form(
       key: fkey,
       child: SafeArea(
@@ -50,22 +102,9 @@ class _VerifyOtpState extends State<VerifyOtp> {
                       },
                     ),
                     onTap: () {
-                      print(provider.getVerificationId);
-                      setState(() {
-                        isLoading = true;
-                      });
-                      signInWithPhoneNumber(
-                        otpController.text,
-                        provider.getVerificationId,
-                        context,
-                      ).then((value) {
-                        if (value) {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return HomePage();
-                          }));
-                        }
-                      });
+                      if(fkey.currentState.validate()){
+                        enterOTP(context);
+                      }
                     },
                   ),
                 ),

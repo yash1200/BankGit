@@ -6,7 +6,7 @@ class LoginWidget extends StatefulWidget {
   String title;
   String subtitle;
   VoidCallback onTap;
-  bool isLoading=false;
+  bool isLoading = false;
 
   LoginWidget({
     this.textField,
