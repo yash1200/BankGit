@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
                     textField: TextFormField(
                       decoration: InputDecoration(
                         hintText: 'Phone Number',
-                        labelText: 'Phone Number',
+                        labelText: '98XXXXXXXX',
                       ),
                       controller: phoneNumberController,
                       keyboardType: TextInputType.number,

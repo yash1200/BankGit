@@ -63,15 +63,14 @@ class _AddDetailsState extends State<AddDetails> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: LoginWidget(
-                    title: 'Login',
-                    subtitle: 'Sign-In',
+                    title: 'Add\nDetails',
+                    subtitle: 'Trust-Us',
                     isLoading: isLoading,
                     textField: Column(
                       children: <Widget>[
                         TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Your Name',
-                            labelText: 'Your Name',
                           ),
                           textCapitalization: TextCapitalization.words,
                           controller: nameController,
@@ -85,7 +84,7 @@ class _AddDetailsState extends State<AddDetails> {
                         TextFormField(
                           decoration: InputDecoration(
                             hintText: 'Your Email',
-                            labelText: 'Your Email',
+                            labelText: 'xyz@example.com',
                           ),
                           controller: emailController,
                           validator: (value) {
