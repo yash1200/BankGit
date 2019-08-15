@@ -1,5 +1,6 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/utils/Style.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
 class Branches extends StatefulWidget {
@@ -101,7 +102,12 @@ class _BranchesState extends State<Branches> {
             );
           } else {
             return Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitWave(
+                color: darkColor,
+                size: 25,
+                type: SpinKitWaveType.center,
+                duration: Duration(seconds: 1),
+              ),
             );
           }
         },

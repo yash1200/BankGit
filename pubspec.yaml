@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   cloud_firestore:
   firebase_auth: ^0.14.0+1
+  flutter_spinkit:
   provider:
 
 dev_dependencies:
