@@ -65,33 +65,38 @@ class _BranchesState extends State<Branches> {
                         mainAxisSpacing: 10,
                       ),
                       itemBuilder: (context, index) {
-                        return Container(
-                          width: size.width / 2,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            gradient: grads[index],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/circuit.png',
-                                height: size.height / 10,
-                                width: size.height / 10,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                snapshot.data[index].documentID,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w300,
+                        return GestureDetector(
+                          onTap: () {
+
+                          },
+                          child: Container(
+                            width: size.width / 2,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              gradient: grads[index],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/circuit.png',
+                                  height: size.height / 10,
+                                  width: size.height / 10,
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  snapshot.data[index].documentID,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

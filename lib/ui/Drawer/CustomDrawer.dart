@@ -1,12 +1,13 @@
 import 'package:bank_management/model/user.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Login/Login.dart';
+import 'package:bank_management/ui/views/CreateBranch.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Branches.dart';
+import '../views/Branches.dart';
 
 class CustomDrawer extends StatefulWidget {
   @override
@@ -49,6 +50,28 @@ class _CustomDrawerState extends State<CustomDrawer> {
               style: defaultTextStyle,
             ),
           ),
+        ),
+        ListTile(
+          title: Text(
+            'Create New Branch',
+            style: defaultTextStyle,
+          ),
+          leading: Image.asset(
+            'assets/rupees.png',
+            height: size.height / 22,
+            width: size.height / 22,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return CreateBranch();
+                },
+              ),
+            );
+          },
         ),
         ListTile(
           title: Text(

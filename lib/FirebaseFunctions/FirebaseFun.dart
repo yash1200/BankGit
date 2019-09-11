@@ -60,6 +60,7 @@ Future<bool> signInWithPhoneNumber(
   } catch (e) {
     print(e);
     print('Failed');
+    return false;
   }
 }
 
@@ -120,4 +121,20 @@ Future<List<DocumentSnapshot>> getBranches() async {
       .collection('branches')
       .getDocuments();
   return querySnapshot.documents;
+}
+
+void createBranch(String name, String description) async {
+  Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .collection('branches')
+      .document(name)
+      .setData({
+    'balance': 0,
+    'time': DateTime
+        .now()
+        .millisecondsSinceEpoch,
+    'transactions': 0,
+    'desc': description,
+  });
 }

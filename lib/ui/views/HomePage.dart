@@ -2,7 +2,7 @@ import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'Drawer/CustomDrawer.dart';
+import '../Drawer/CustomDrawer.dart';
 
 class HomePage extends StatefulWidget {
   @override

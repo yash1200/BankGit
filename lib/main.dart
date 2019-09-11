@@ -1,5 +1,5 @@
 import 'package:bank_management/provider/AppProvider.dart';
-import 'package:bank_management/ui/HomePage.dart';
+import 'package:bank_management/ui/views/HomePage.dart';
 import 'package:bank_management/ui/Login/Login.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -5,7 +5,7 @@ import 'package:bank_management/ui/Login/loginWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../HomePage.dart';
+import '../views/HomePage.dart';
 import 'AddDetails.dart';
 
 class VerifyOtp extends StatefulWidget {
@@ -47,25 +47,27 @@ class _VerifyOtpState extends State<VerifyOtp> {
       context,
     ).then((value) {
       if (value) {
-        if (isUserPresent() == true) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return HomePage();
-              },
-            ),
-          );
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return AddDetails(widget.phoneNumber);
-              },
-            ),
-          );
-        }
+        isUserPresent().then((value1) {
+          if (value1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return HomePage();
+                },
+              ),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return AddDetails(widget.phoneNumber);
+                },
+              ),
+            );
+          }
+        });
       }
     });
   }

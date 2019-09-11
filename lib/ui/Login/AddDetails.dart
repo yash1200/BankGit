@@ -3,7 +3,7 @@ import 'package:bank_management/model/user.dart';
 import 'package:bank_management/ui/Widgets/CustomPaint.dart';
 import 'package:flutter/material.dart';
 
-import '../HomePage.dart';
+import '../views/HomePage.dart';
 import 'loginWidget.dart';
 
 class AddDetails extends StatefulWidget {
