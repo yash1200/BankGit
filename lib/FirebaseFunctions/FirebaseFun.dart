@@ -130,13 +130,23 @@ void createBranch(String name, String description) async {
 
 Future<List<DocumentSnapshot>> getTransactionList(String branch,
     int type) async {
-  QuerySnapshot querySnapshot = await Firestore.instance
+  QuerySnapshot querySnapshot = type != 0
+      ? await Firestore.instance
       .collection('users')
       .document(await getUid())
       .collection('branches')
       .document(branch)
       .collection('transactions')
       .where('type', isEqualTo: type)
+      .orderBy('time', descending: true)
+      .getDocuments()
+      : await Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .collection('branches')
+      .document(branch)
+      .collection('transactions')
+      .orderBy('time', descending: true)
       .getDocuments();
   return querySnapshot.documents;
 }

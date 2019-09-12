@@ -1,5 +1,6 @@
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Widgets/customBottomSheet.dart';
+import 'package:bank_management/ui/Widgets/customFilterSheet.dart';
 import 'package:bank_management/ui/Widgets/transactionList.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,6 +36,21 @@ class _branchDetailsState extends State<branchDetails>
     );
   }
 
+  showFilterSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+      builder: (context) {
+        return customFilterSheet();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -62,8 +78,8 @@ class _branchDetailsState extends State<branchDetails>
         ),
       ),
       body: ListView(
-        physics: BouncingScrollPhysics(),
         shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
         padding: EdgeInsets.only(left: 10, right: 10),
         children: <Widget>[
           SizedBox(
@@ -139,71 +155,27 @@ class _branchDetailsState extends State<branchDetails>
           SizedBox(
             height: size.height / 40,
           ),
-          Text(
-            'Recent Transactions',
-            style: defaultTextStyleLarge,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                'Recent',
+                style: defaultTextStyleLarge,
+              ),
+              IconButton(
+                icon: Icon(Icons.filter_list),
+                onPressed: () {
+                  showFilterSheet(context);
+                },
+              )
+            ],
           ),
           SizedBox(
             height: size.height / 40,
           ),
-          Row(
-            children: List<Widget>.generate(
-              3,
-              (index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 15),
-                  child: GestureDetector(
-                    onTap: () {
-                      provider.setTransactionIndex(index);
-                      pageController.jumpToPage(provider.transactionIndex);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          left: 20, right: 20, top: 5, bottom: 5),
-                      decoration: BoxDecoration(
-                        color: index == provider.transactionIndex
-                            ? darkColor
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(
-                          width: 1,
-                          color: darkColor,
-                        ),
-                      ),
-                      child: Text(
-                        tabName[index],
-                        style: TextStyle(
-                          color: index == provider.transactionIndex
-                              ? Colors.white
-                              : darkColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          Container(
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.width / 2,
-              maxWidth: MediaQuery.of(context).size.width,
-              maxHeight: MediaQuery.of(context).size.width,
-            ),
-            child: PageView.builder(
-              controller: pageController,
-              scrollDirection: Axis.horizontal,
-              itemCount: 3,
-              onPageChanged: (index) {
-                provider.setTransactionIndex(index);
-              },
-              itemBuilder: (context, index) {
-                return transactionPage(
-                  widget.snapshot.documentID,
-                  typeOfTransaction[index],
-                );
-              },
-            ),
+          transactionPage(
+            widget.snapshot.documentID,
+            provider.transactionIndex,
           ),
         ],
       ),

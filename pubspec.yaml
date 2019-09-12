@@ -27,6 +27,7 @@ dependencies:
   firebase_auth: ^0.14.0+1
   flutter_spinkit:
   font_awesome_flutter:
+  intl:
   flutter_upi:
   provider:
 

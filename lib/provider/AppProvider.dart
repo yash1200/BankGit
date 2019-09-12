@@ -18,5 +18,4 @@ class AppProvider with ChangeNotifier {
     _transactionIndex = value;
     notifyListeners();
   }
-
 }
