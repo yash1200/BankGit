@@ -1,4 +1,5 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
+import 'package:bank_management/ui/views/branchDetails.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,16 @@ class _BranchesState extends State<Branches> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return branchDetails(
+                                    snapshot: snapshot.data[index],
+                                  );
+                                },
+                              ),
+                            );
                           },
                           child: Container(
                             width: size.width / 2,

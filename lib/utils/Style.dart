@@ -6,6 +6,10 @@ TextStyle defaultTextStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w400,
 );
+TextStyle defaultTextStyleLarge = TextStyle(
+  fontSize: 25,
+  fontWeight: FontWeight.w400,
+);
 List<LinearGradient> grads = [
   LinearGradient(
     colors: [Color(0xff1d2b64), Color(0xfff8cdda)],

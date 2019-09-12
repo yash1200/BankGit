@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class AppProvider with ChangeNotifier {
   User _user;
+  int _transactionIndex = 0;
 
   User get getUser => _user;
 
@@ -10,4 +11,12 @@ class AppProvider with ChangeNotifier {
     _user = value;
     notifyListeners();
   }
+
+  int get transactionIndex => _transactionIndex;
+
+  setTransactionIndex(int value) {
+    _transactionIndex = value;
+    notifyListeners();
+  }
+
 }

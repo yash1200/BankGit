@@ -86,18 +86,7 @@ void registerUser(User user) {
     'uid': user.uid,
     'branches': 1,
   });
-  Firestore.instance
-      .collection('users')
-      .document(user.uid)
-      .collection('branches')
-      .document('Master')
-      .setData({
-    'balance': 0,
-    'transactions': 0,
-    'time': DateTime
-        .now()
-        .millisecondsSinceEpoch,
-  });
+  createBranch('master', 'Master Branch');
 }
 
 Future<User> getUserDetails() async {
@@ -137,4 +126,17 @@ void createBranch(String name, String description) async {
     'transactions': 0,
     'desc': description,
   });
+}
+
+Future<List<DocumentSnapshot>> getTransactionList(String branch,
+    int type) async {
+  QuerySnapshot querySnapshot = await Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .collection('branches')
+      .document(branch)
+      .collection('transactions')
+      .where('type', isEqualTo: type)
+      .getDocuments();
+  return querySnapshot.documents;
 }
