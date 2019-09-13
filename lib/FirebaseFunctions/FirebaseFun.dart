@@ -112,6 +112,16 @@ Future<List<DocumentSnapshot>> getBranches() async {
   return querySnapshot.documents;
 }
 
+Future<int> getBranchBalance(String branch) async {
+  DocumentSnapshot documentSnapshot = await Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .collection('branches')
+      .document(branch)
+      .get();
+  return documentSnapshot.data['balance'];
+}
+
 void createBranch(String name, String description) async {
   Firestore.instance
       .collection('users')
@@ -161,5 +171,29 @@ void addMoney(String branch, int amount) async {
   var balance = documentSnapshot.data['balance'];
   documentSnapshot.reference.updateData({
     'balance': balance + amount,
+  });
+  makeTransaction(branch, amount, 1, 'Money added');
+}
+
+void makeTransaction(String branch, int amount, int type, String desc) async {
+  int balance = await getBranchBalance(branch);
+  Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .collection('branches')
+      .document(branch)
+      .collection('transactions')
+      .document(DateTime
+      .now()
+      .millisecondsSinceEpoch
+      .toString())
+      .setData({
+    'time': DateTime
+        .now()
+        .millisecondsSinceEpoch,
+    'amount': amount,
+    'type': type,
+    'desc': desc,
+    'balance': balance,
   });
 }

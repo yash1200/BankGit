@@ -1,3 +1,4 @@
+import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Widgets/customAlertDialog.dart';
 import 'package:bank_management/ui/Widgets/customBottomSheet.dart';
@@ -117,12 +118,28 @@ class _branchDetailsState extends State<branchDetails>
                     SizedBox(
                       width: 5,
                     ),
-                    Text(
-                      widget.snapshot['balance'].toString(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
+                    StreamBuilder(
+                      stream: getBranchBalance(widget.snapshot.documentID)
+                          .asStream(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(
+                            snapshot.data.toString(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                            ),
+                          );
+                        } else {
+                          return Text(
+                            '0',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ],
                 ),

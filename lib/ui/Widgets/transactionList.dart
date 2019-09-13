@@ -38,6 +38,14 @@ class _transactionPageState extends State<transactionPage> {
                       fontSize: 18,
                     ),
                   ),
+                  subtitle: Text(
+                    'Balance: ${snapshot.data[index]['balance'].toString()}'
+                        '(${snapshot.data[index]['type'] == 1 ? '+' : '-'}'
+                        '${snapshot.data[index]['amount'].toString()})',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,

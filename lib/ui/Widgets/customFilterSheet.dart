@@ -8,7 +8,7 @@ class customFilterSheet extends StatefulWidget {
 }
 
 class _customFilterSheetState extends State<customFilterSheet> {
-  var titleType = ['All', 'Recieved', 'Done'];
+  var titleType = ['All', 'Credit', 'Debit'];
 
   @override
   Widget build(BuildContext context) {
