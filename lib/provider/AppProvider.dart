@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class AppProvider with ChangeNotifier {
   User _user;
   int _transactionIndex = 0;
+  var _balance;
 
   User get getUser => _user;
 
@@ -18,4 +19,11 @@ class AppProvider with ChangeNotifier {
     _transactionIndex = value;
     notifyListeners();
   }
+
+  get balance => _balance;
+
+  set balance(value) {
+    _balance = value;
+  }
+
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class transactionPage extends StatefulWidget {
@@ -19,48 +20,56 @@ class _transactionPageState extends State<transactionPage> {
       future: getTransactionList(widget.branch, widget.type),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: snapshot.data.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  snapshot.data[index]['desc'],
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18,
+          if (snapshot.data.length == 0) {
+            return Center(
+              child: Text('No Transactions done'),
+            );
+          } else {
+            return ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(
+                    snapshot.data[index]['desc'],
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-                trailing: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      snapshot.data[index]['amount'].toString(),
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: snapshot.data[index]['type'] == 1
-                            ? Colors.green
-                            : Colors.redAccent,
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        snapshot.data[index]['amount'].toString(),
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: snapshot.data[index]['type'] == 1
+                              ? Colors.green
+                              : Colors.redAccent,
+                        ),
                       ),
-                    ),
-                    Text(
-                      DateFormat.MMMd()
-                          .format(DateTime.fromMillisecondsSinceEpoch(
-                          snapshot.data[index]['time']))
-                          .toString(),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
+                      Text(
+                        DateFormat.MMMd()
+                            .format(DateTime.fromMillisecondsSinceEpoch(
+                            snapshot.data[index]['time']))
+                            .toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
+                    ],
+                  ),
+                );
+              },
+            );
+          }
         } else {
-          return Center(child: CircularProgressIndicator());
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );

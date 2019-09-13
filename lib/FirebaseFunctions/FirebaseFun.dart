@@ -150,3 +150,16 @@ Future<List<DocumentSnapshot>> getTransactionList(String branch,
       .getDocuments();
   return querySnapshot.documents;
 }
+
+void addMoney(String branch, int amount) async {
+  DocumentSnapshot documentSnapshot = await Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .collection('branches')
+      .document(branch)
+      .get();
+  var balance = documentSnapshot.data['balance'];
+  documentSnapshot.reference.updateData({
+    'balance': balance + amount,
+  });
+}

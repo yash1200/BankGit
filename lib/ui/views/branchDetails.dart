@@ -1,4 +1,5 @@
 import 'package:bank_management/provider/AppProvider.dart';
+import 'package:bank_management/ui/Widgets/customAlertDialog.dart';
 import 'package:bank_management/ui/Widgets/customBottomSheet.dart';
 import 'package:bank_management/ui/Widgets/customFilterSheet.dart';
 import 'package:bank_management/ui/Widgets/transactionList.dart';
@@ -24,8 +25,6 @@ class _branchDetailsState extends State<branchDetails>
   var pageController = PageController(
     initialPage: 0,
   );
-  var tabName = ['All', 'Recieved', 'Done'];
-  var typeOfTransaction = [1, 1, 2];
 
   showSheet(BuildContext context) {
     showModalBottomSheet(
@@ -47,6 +46,18 @@ class _branchDetailsState extends State<branchDetails>
       ),
       builder: (context) {
         return customFilterSheet();
+      },
+    );
+  }
+
+  showAddSheet(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return customAlertDialog(
+          branch: widget.snapshot.documentID,
+        );
       },
     );
   }
@@ -152,8 +163,31 @@ class _branchDetailsState extends State<branchDetails>
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 50, right: 50),
+            child: FlatButton(
+              onPressed: () {
+                showAddSheet(context);
+              },
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide(
+                  color: darkColor,
+                  width: 1,
+                ),
+              ),
+              child: Text(
+                'Add Money',
+                style: TextStyle(
+                  color: darkColor,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
           SizedBox(
-            height: size.height / 40,
+            height: size.height / 80,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,7 +205,7 @@ class _branchDetailsState extends State<branchDetails>
             ],
           ),
           SizedBox(
-            height: size.height / 40,
+            height: size.height / 80,
           ),
           transactionPage(
             widget.snapshot.documentID,
