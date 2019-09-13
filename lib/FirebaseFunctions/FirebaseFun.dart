@@ -2,6 +2,7 @@ import 'package:bank_management/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_upi/flutter_upi.dart';
 import 'package:provider/provider.dart';
 import 'package:bank_management/provider/LoginProvider.dart';
 
@@ -12,8 +13,8 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
   print(phone);
   final PhoneVerificationCompleted verificationCompleted =
       (AuthCredential phoneAuthCredential) {
-    _auth.signInWithCredential(phoneAuthCredential);
-    provider.setIsLoggedIn(true);
+    //_auth.signInWithCredential(phoneAuthCredential);
+    //provider.setIsLoggedIn(true);
   };
 
   final PhoneVerificationFailed verificationFailed =
@@ -22,6 +23,7 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
   final PhoneCodeSent codeSent =
       (String verificationId, [int forceResendingToken]) async {
     _verificationId = verificationId;
+    print("Verification ID: " + verificationId);
     provider.setVerificationId(verificationId);
   };
 
@@ -31,6 +33,7 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
   };
 
   print('Sending..');
+  print('ver:$_verificationId');
   await _auth.verifyPhoneNumber(
       phoneNumber: "+91" + phone,
       timeout: const Duration(seconds: 5),
@@ -173,6 +176,21 @@ void addMoney(String branch, int amount) async {
     'balance': balance + amount,
   });
   makeTransaction(branch, amount, 1, 'Money added');
+}
+
+void makeUpiPayment(String amount, String phone) async {
+  String response = await FlutterUpi.initiateTransaction(
+    app: FlutterUpiApps.PayTM,
+    pa: "$phone@upi",
+    pn: "Receiver Name",
+    tr: "UniqueTransactionId",
+    tn: "This is a transaction Note",
+    am: "$amount",
+    cu: "INR",
+    url: "https://www.google.com",
+  );
+  FlutterUpiResponse flutterUpiResponse = FlutterUpiResponse(response);
+  print(flutterUpiResponse.Status);
 }
 
 void makeTransaction(String branch, int amount, int type, String desc) async {

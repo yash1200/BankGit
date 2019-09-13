@@ -22,19 +22,6 @@ class _VerifyOtpState extends State<VerifyOtp> {
   TextEditingController otpController = TextEditingController();
   bool isLoading = false;
 
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    final provider = Provider.of<LoginProvider>(context);
-    if (provider.getIsLoggedIn) {
-      setState(() {
-        otpController.text = 'Code Added';
-      });
-      enterOTP(context);
-    }
-  }
-
   enterOTP(BuildContext context) {
     final provider = Provider.of<LoginProvider>(context);
     print(provider.getVerificationId);
@@ -74,7 +61,6 @@ class _VerifyOtpState extends State<VerifyOtp> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<LoginProvider>(context);
     return Form(
       key: fkey,
       child: SafeArea(

@@ -1,7 +1,7 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Widgets/customAlertDialog.dart';
-import 'package:bank_management/ui/Widgets/customBottomSheet.dart';
+import 'package:bank_management/ui/Widgets/payNow.dart';
 import 'package:bank_management/ui/Widgets/customFilterSheet.dart';
 import 'package:bank_management/ui/Widgets/transactionList.dart';
 import 'package:bank_management/utils/Style.dart';
@@ -26,15 +26,6 @@ class _branchDetailsState extends State<branchDetails>
   var pageController = PageController(
     initialPage: 0,
   );
-
-  showSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return customBottomSheet();
-      },
-    );
-  }
 
   showFilterSheet(BuildContext context) {
     showModalBottomSheet(
@@ -161,7 +152,14 @@ class _branchDetailsState extends State<branchDetails>
             padding: const EdgeInsets.only(left: 50, right: 50),
             child: FlatButton(
               onPressed: () {
-                showSheet(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return payNow(widget.snapshot);
+                    },
+                  ),
+                );
               },
               color: Colors.white,
               shape: RoundedRectangleBorder(
