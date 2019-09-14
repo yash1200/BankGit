@@ -52,6 +52,11 @@ flutter:
     - assets/circuit.png
     - assets/exit.png
     - assets/sun.png
+    - assets/transfer.png
+    - assets/paytm.png
+    - assets/amazon-pay.png
+    - assets/google-pay.png
+    - assets/bhim.png
     - assets/rupees.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

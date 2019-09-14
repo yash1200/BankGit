@@ -2,6 +2,26 @@ import 'package:flutter/material.dart';
 
 Color darkColor = Color(0xff4a5059);
 Color orange = Color(0xfffeaf4a);
+OutlineInputBorder outlineInputBorder = OutlineInputBorder(
+  borderRadius: BorderRadius.circular(10),
+  borderSide: BorderSide(
+    color: darkColor,
+    width: 1,
+  ),
+);
+RoundedRectangleBorder roundedRectangleBorder = RoundedRectangleBorder(
+  borderRadius: BorderRadius.circular(10),
+  side: BorderSide(
+    width: 1,
+    color: darkColor,
+  ),
+);
+RoundedRectangleBorder sheetBorder = RoundedRectangleBorder(
+  borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(10),
+    topRight: Radius.circular(10),
+  ),
+);
 TextStyle defaultTextStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w400,

@@ -178,19 +178,38 @@ void addMoney(String branch, int amount) async {
   makeTransaction(branch, amount, 1, 'Money added');
 }
 
-void makeUpiPayment(String amount, String phone) async {
+void debitMoney(String branch, int amount, String desc) async {
+  DocumentSnapshot documentSnapshot = await Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .collection('branches')
+      .document(branch)
+      .get();
+  var balance = documentSnapshot.data['balance'];
+  documentSnapshot.reference.updateData({
+    'balance': balance - amount,
+  });
+  makeTransaction(branch, amount, 2, desc);
+}
+
+void makeUpiPayment(String amount, String phone, String app, String desc,
+    String branch) async {
   String response = await FlutterUpi.initiateTransaction(
-    app: FlutterUpiApps.PayTM,
+    app: app,
     pa: "$phone@upi",
     pn: "Receiver Name",
     tr: "UniqueTransactionId",
-    tn: "This is a transaction Note",
+    tn: "$desc",
     am: "$amount",
     cu: "INR",
     url: "https://www.google.com",
   );
+  print("response: $response");
   FlutterUpiResponse flutterUpiResponse = FlutterUpiResponse(response);
-  print(flutterUpiResponse.Status);
+  print("Status: ${flutterUpiResponse.Status}");
+  if (flutterUpiResponse.Status == 'SUCCESS') {
+    debitMoney(branch, int.parse(amount), desc);
+  }
 }
 
 void makeTransaction(String branch, int amount, int type, String desc) async {

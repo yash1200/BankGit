@@ -1,7 +1,7 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Widgets/customAlertDialog.dart';
-import 'package:bank_management/ui/Widgets/payNow.dart';
+import 'package:bank_management/ui/views/payNow.dart';
 import 'package:bank_management/ui/Widgets/customFilterSheet.dart';
 import 'package:bank_management/ui/Widgets/transactionList.dart';
 import 'package:bank_management/utils/Style.dart';
@@ -30,12 +30,7 @@ class _branchDetailsState extends State<branchDetails>
   showFilterSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        ),
-      ),
+      shape: sheetBorder,
       builder: (context) {
         return customFilterSheet();
       },
@@ -162,13 +157,7 @@ class _branchDetailsState extends State<branchDetails>
                 );
               },
               color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(
-                  color: darkColor,
-                  width: 1,
-                ),
-              ),
+              shape: roundedRectangleBorder,
               child: Text(
                 'Pay Now',
                 style: TextStyle(
@@ -185,13 +174,7 @@ class _branchDetailsState extends State<branchDetails>
                 showAddSheet(context);
               },
               color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(
-                  color: darkColor,
-                  width: 1,
-                ),
-              ),
+              shape: roundedRectangleBorder,
               child: Text(
                 'Add Money',
                 style: TextStyle(

@@ -1,10 +1,11 @@
 import 'package:bank_management/model/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_upi/flutter_upi.dart';
 
 class AppProvider with ChangeNotifier {
   User _user;
   int _transactionIndex = 0;
-  var _balance;
+  var _upiType;
 
   User get getUser => _user;
 
@@ -20,10 +21,10 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  get balance => _balance;
+  get upiType => _upiType;
 
-  set balance(value) {
-    _balance = value;
+  setUpiType(value) {
+    _upiType = value;
+    notifyListeners();
   }
-
 }
