@@ -59,7 +59,11 @@ class _customAlertDialogState extends State<customAlertDialog> {
             FlatButton(
               onPressed: () {
                 if (_fkey.currentState.validate()) {
-                  addMoney(widget.branch, int.parse(amountController.text));
+                  addMoney(
+                    widget.branch,
+                    int.parse(amountController.text),
+                    'Money Added',
+                  );
                   Navigator.pop(context);
                 }
               },

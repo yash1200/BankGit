@@ -164,7 +164,7 @@ Future<List<DocumentSnapshot>> getTransactionList(String branch,
   return querySnapshot.documents;
 }
 
-void addMoney(String branch, int amount) async {
+void addMoney(String branch, int amount, String desc) async {
   DocumentSnapshot documentSnapshot = await Firestore.instance
       .collection('users')
       .document(await getUid())
@@ -175,7 +175,7 @@ void addMoney(String branch, int amount) async {
   documentSnapshot.reference.updateData({
     'balance': balance + amount,
   });
-  makeTransaction(branch, amount, 1, 'Money added');
+  makeTransaction(branch, amount, 1, desc);
 }
 
 void debitMoney(String branch, int amount, String desc) async {

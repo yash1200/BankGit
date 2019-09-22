@@ -1,5 +1,10 @@
+import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
+import 'package:bank_management/provider/AppProvider.dart';
+import 'package:bank_management/ui/Widgets/transactionFromSheet.dart';
+import 'package:bank_management/ui/Widgets/transactionToSheet.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class transfer extends StatefulWidget {
   @override
@@ -7,8 +12,35 @@ class transfer extends StatefulWidget {
 }
 
 class _transferState extends State<transfer> {
+  TextEditingController amountController = TextEditingController();
+  var _fkey = GlobalKey<FormState>();
+
+  showTransactionFrom(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: sheetBorder,
+      builder: (context) {
+        return transactionFrom();
+      },
+    );
+  }
+
+  showTransactionTo(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: sheetBorder,
+      builder: (context) {
+        return transactionTo();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AppProvider>(context);
+    var size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -30,7 +62,125 @@ class _transferState extends State<transfer> {
           ),
         ),
       ),
-      body: Container(),
+      body: Form(
+        key: _fkey,
+        child: ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.only(
+            left: 10,
+            right: 10,
+          ),
+          physics: BouncingScrollPhysics(),
+          children: <Widget>[
+            Text(
+              'From',
+              style: TextStyle(
+                color: darkColor,
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(
+              height: size.height / 80,
+            ),
+            GestureDetector(
+              onTap: () {
+                showTransactionFrom(context);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    provider.transactionFrom,
+                    style: TextStyle(
+                      color: darkColor,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  Icon(Icons.arrow_drop_down),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: size.height / 60,
+            ),
+            Text(
+              'To',
+              style: TextStyle(
+                color: darkColor,
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(
+              height: size.height / 80,
+            ),
+            GestureDetector(
+              onTap: () {
+                showTransactionTo(context);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    provider.transactionTo,
+                    style: TextStyle(
+                      color: darkColor,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  Icon(Icons.arrow_drop_down),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: size.height / 40,
+            ),
+            TextFormField(
+              controller: amountController,
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Enter Some amount';
+                } else if (int.parse(value) > provider.transactionFromBalance) {
+                  print(provider.transactionFromBalance);
+                  return 'Amount is large';
+                }
+                return null;
+              },
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Amount',
+                alignLabelWithHint: true,
+                border: outlineInputBorder,
+              ),
+            ),
+            SizedBox(
+              height: size.height / 80,
+            ),
+            FlatButton(
+              onPressed: () {
+                if (_fkey.currentState.validate()) {
+                  addMoney(
+                    provider.transactionTo,
+                    int.parse(amountController.text),
+                    'From ${provider.transactionFrom}',
+                  );
+                  debitMoney(
+                    provider.transactionFrom,
+                    int.parse(amountController.text),
+                    'To ${provider.transactionTo}',
+                  );
+                  Navigator.pop(context);
+                }
+              },
+              shape: roundedRectangleBorder,
+              child: Text('Transfer'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

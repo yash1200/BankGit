@@ -6,6 +6,11 @@ class AppProvider with ChangeNotifier {
   User _user;
   int _transactionIndex = 0;
   var _upiType;
+  String _transactionFrom = 'Not Selected',
+      _transactionTo = 'Not Selected';
+  int _transactionFromIndex = 0,
+      _transactionToIndex = 0,
+      _transactionFromBalance = 0;
 
   User get getUser => _user;
 
@@ -25,6 +30,41 @@ class AppProvider with ChangeNotifier {
 
   setUpiType(value) {
     _upiType = value;
+    notifyListeners();
+  }
+
+  get transactionTo => _transactionTo;
+
+  setTransactionTo(value) {
+    _transactionTo = value;
+    notifyListeners();
+  }
+
+  String get transactionFrom => _transactionFrom;
+
+  setTransactionFrom(String value) {
+    _transactionFrom = value;
+    notifyListeners();
+  }
+
+  get transactionToIndex => _transactionToIndex;
+
+  setTransactionToIndex(value) {
+    _transactionToIndex = value;
+    notifyListeners();
+  }
+
+  int get transactionFromIndex => _transactionFromIndex;
+
+  setTransactionFromIndex(int value) {
+    _transactionFromIndex = value;
+    notifyListeners();
+  }
+
+  get transactionFromBalance => _transactionFromBalance;
+
+  setTransactionFromBalance(value) {
+    _transactionFromBalance = value;
     notifyListeners();
   }
 }
