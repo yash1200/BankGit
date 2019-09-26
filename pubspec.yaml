@@ -52,6 +52,7 @@ flutter:
     - assets/circuit.png
     - assets/exit.png
     - assets/sun.png
+    - assets/money.png
     - assets/transfer.png
     - assets/paytm.png
     - assets/amazon-pay.png

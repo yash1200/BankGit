@@ -13,6 +13,7 @@ class transfer extends StatefulWidget {
 
 class _transferState extends State<transfer> {
   TextEditingController amountController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   var _fkey = GlobalKey<FormState>();
 
   showTransactionFrom(BuildContext context) {
@@ -72,16 +73,39 @@ class _transferState extends State<transfer> {
           ),
           physics: BouncingScrollPhysics(),
           children: <Widget>[
+            SizedBox(
+              height: size.height / 40,
+            ),
+            Image.asset(
+              'assets/money.png',
+              height: size.height / 10,
+              width: size.height / 10,
+            ),
+            SizedBox(
+              height: size.height / 60,
+            ),
+            Text(
+              'Transfer your money from one branch to other branch',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: darkColor,
+                fontSize: 25,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+            SizedBox(
+              height: size.height / 60,
+            ),
             Text(
               'From',
               style: TextStyle(
                 color: darkColor,
                 fontSize: 30,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
             ),
             SizedBox(
-              height: size.height / 80,
+              height: size.height / 60,
             ),
             GestureDetector(
               onTap: () {
@@ -110,7 +134,7 @@ class _transferState extends State<transfer> {
               style: TextStyle(
                 color: darkColor,
                 fontSize: 30,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
             ),
             SizedBox(
@@ -152,6 +176,23 @@ class _transferState extends State<transfer> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Amount',
+                alignLabelWithHint: true,
+                border: outlineInputBorder,
+              ),
+            ),
+            SizedBox(
+              height: size.height / 80,
+            ),
+            TextFormField(
+              controller: descriptionController,
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please Enter description';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                labelText: 'Description',
                 alignLabelWithHint: true,
                 border: outlineInputBorder,
               ),
