@@ -78,11 +78,11 @@ class _transferState extends State<transfer> {
             ),
             Image.asset(
               'assets/money.png',
-              height: size.height / 10,
-              width: size.height / 10,
+              height: size.height / 8,
+              width: size.height / 8,
             ),
             SizedBox(
-              height: size.height / 60,
+              height: size.height / 40,
             ),
             Text(
               'Transfer your money from one branch to other branch',
@@ -94,7 +94,7 @@ class _transferState extends State<transfer> {
               ),
             ),
             SizedBox(
-              height: size.height / 60,
+              height: size.height / 40,
             ),
             Text(
               'From',

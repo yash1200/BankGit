@@ -28,7 +28,7 @@ class _BranchesState extends State<Branches> {
           },
         ),
         title: Text(
-          'Menu',
+          'Branches',
           style: TextStyle(
             color: darkColor,
           ),
@@ -43,8 +43,19 @@ class _BranchesState extends State<Branches> {
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    SizedBox(
+                      height: size.height / 40,
+                    ),
+                    Image.asset(
+                      'assets/data.png',
+                      height: size.height / 8,
+                      width: size.height / 8,
+                    ),
+                    SizedBox(
+                      height: size.height / 40,
+                    ),
                     Text(
                       'Your Branches',
                       style: TextStyle(
@@ -53,7 +64,7 @@ class _BranchesState extends State<Branches> {
                       ),
                     ),
                     SizedBox(
-                      height: size.height / 20,
+                      height: size.height / 40,
                     ),
                     GridView.builder(
                       itemCount: snapshot.data.length,
