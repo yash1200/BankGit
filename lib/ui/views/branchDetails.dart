@@ -23,9 +23,6 @@ class branchDetails extends StatefulWidget {
 class _branchDetailsState extends State<branchDetails>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  var pageController = PageController(
-    initialPage: 0,
-  );
 
   showFilterSheet(BuildContext context) {
     showModalBottomSheet(
@@ -38,15 +35,24 @@ class _branchDetailsState extends State<branchDetails>
   }
 
   showAddSheet(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (context) {
-        return customAlertDialog(
-          branch: widget.snapshot.documentID,
-        );
-      },
-    );
+    getAddAmount().then((value) {
+      showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return customAlertDialog(
+            branch: widget.snapshot.documentID,
+            money: value,
+          );
+        },
+      );
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override

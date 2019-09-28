@@ -125,6 +125,21 @@ Future<int> getBranchBalance(String branch) async {
   return documentSnapshot.data['balance'];
 }
 
+
+Future<int> getAddAmount() async {
+  int maxAmount = 0,
+      addAmount = 0;
+  List<DocumentSnapshot> documents = await getBranches();
+  for (int i = 0; i < documents.length; i++) {
+    if (documents[i].documentID == 'master') {
+      maxAmount = documents[i].data['balance'];
+    } else {
+      addAmount += documents[i].data['balance'];
+    }
+  }
+  return maxAmount - addAmount;
+}
+
 void createBranch(String name, String description) async {
   Firestore.instance
       .collection('users')

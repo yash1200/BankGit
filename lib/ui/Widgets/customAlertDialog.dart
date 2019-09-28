@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class customAlertDialog extends StatefulWidget {
   String branch;
+  int money;
 
-  customAlertDialog({this.branch});
+  customAlertDialog({this.branch, this.money});
 
   @override
   _customAlertDialogState createState() => _customAlertDialogState();
@@ -49,6 +50,8 @@ class _customAlertDialogState extends State<customAlertDialog> {
                   return 'Amount can\'t be empty';
                 } else if (int.parse(value) == 0) {
                   return 'Amount can\'t be zero';
+                } else if (double.parse(value) > widget.money) {
+                  return 'Amount can\'t be greater than ${widget.money}';
                 }
                 return null;
               },
