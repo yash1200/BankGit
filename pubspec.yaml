@@ -53,6 +53,8 @@ flutter:
     - assets/exit.png
     - assets/sun.png
     - assets/data.png
+    - assets/team.png
+    - assets/question.png
     - assets/money.png
     - assets/transfer.png
     - assets/paytm.png

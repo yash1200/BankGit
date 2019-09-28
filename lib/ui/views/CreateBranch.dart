@@ -46,8 +46,8 @@ class _CreateBranchState extends State<CreateBranch> {
             children: <Widget>[
               Image.asset(
                 'assets/sun.png',
-                height: size.height / 8,
-                width: size.height / 8,
+                height: size.height / 5,
+                width: size.height / 5,
               ),
               SizedBox(
                 height: size.height / 20,
@@ -57,6 +57,7 @@ class _CreateBranchState extends State<CreateBranch> {
                 decoration: InputDecoration(
                   labelText: "Branch Name*",
                   alignLabelWithHint: true,
+                  border: outlineInputBorder,
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
@@ -68,6 +69,9 @@ class _CreateBranchState extends State<CreateBranch> {
                   }
                 },
               ),
+              SizedBox(
+                height: size.height / 80,
+              ),
               TextFormField(
                 controller: desController,
                 maxLines: 2,
@@ -75,6 +79,7 @@ class _CreateBranchState extends State<CreateBranch> {
                 decoration: InputDecoration(
                   labelText: "Description",
                   alignLabelWithHint: true,
+                  border: outlineInputBorder,
                 ),
                 validator: (value) {
                   if (value.isEmpty) {
@@ -84,7 +89,7 @@ class _CreateBranchState extends State<CreateBranch> {
                 },
               ),
               SizedBox(
-                height: size.height / 20,
+                height: size.height / 40,
               ),
               FlatButton(
                 onPressed: () {

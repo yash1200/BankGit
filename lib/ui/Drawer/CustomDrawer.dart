@@ -2,6 +2,7 @@ import 'package:bank_management/model/user.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Login/Login.dart';
 import 'package:bank_management/ui/views/CreateBranch.dart';
+import 'package:bank_management/ui/views/help.dart';
 import 'package:bank_management/ui/views/transfer.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -113,6 +114,28 @@ class _CustomDrawerState extends State<CustomDrawer> {
               MaterialPageRoute(
                 builder: (context) {
                   return transfer();
+                },
+              ),
+            );
+          },
+        ),
+        ListTile(
+          title: Text(
+            'Help',
+            style: defaultTextStyle,
+          ),
+          leading: Image.asset(
+            'assets/question.png',
+            height: size.height / 22,
+            width: size.height / 22,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return Help();
                 },
               ),
             );
