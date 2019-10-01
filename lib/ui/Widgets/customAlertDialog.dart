@@ -50,7 +50,8 @@ class _customAlertDialogState extends State<customAlertDialog> {
                   return 'Amount can\'t be empty';
                 } else if (int.parse(value) == 0) {
                   return 'Amount can\'t be zero';
-                } else if (double.parse(value) > widget.money) {
+                } else if (double.parse(value) > widget.money &&
+                    widget.branch != 'master') {
                   return 'Amount can\'t be greater than ${widget.money}';
                 }
                 return null;

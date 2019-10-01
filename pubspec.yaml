@@ -30,10 +30,16 @@ dependencies:
   intl:
   flutter_upi:
   provider:
+  flutter_launcher_icons:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  image_path: "assets/icon/wallet.png"
+  android: true
+  ios: true
 
 
 # For information on the generic Dart part of this file, see the
@@ -50,6 +56,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/circuit.png
+    - assets/icon/wallet.png
     - assets/exit.png
     - assets/sun.png
     - assets/data.png

@@ -175,7 +175,7 @@ class _transferState extends State<transfer> {
               },
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: 'Amount',
+                labelText: 'Amount*',
                 alignLabelWithHint: true,
                 border: outlineInputBorder,
               ),
@@ -185,12 +185,6 @@ class _transferState extends State<transfer> {
             ),
             TextFormField(
               controller: descriptionController,
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please Enter description';
-                }
-                return null;
-              },
               decoration: InputDecoration(
                 labelText: 'Description',
                 alignLabelWithHint: true,

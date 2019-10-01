@@ -41,75 +41,78 @@ class _CreateBranchState extends State<CreateBranch> {
         key: _fKey,
         child: Padding(
           padding: const EdgeInsets.only(left: 15, right: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(
-                'assets/sun.png',
-                height: size.height / 5,
-                width: size.height / 5,
-              ),
-              SizedBox(
-                height: size.height / 20,
-              ),
-              TextFormField(
-                controller: nameController,
-                decoration: InputDecoration(
-                  labelText: "Branch Name*",
-                  alignLabelWithHint: true,
-                  border: outlineInputBorder,
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  'assets/sun.png',
+                  height: size.height / 5,
+                  width: size.height / 5,
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Name can\'t be empty';
-                  } else if (value.length > 10) {
-                    return 'Minimum length for name is 10';
-                  } else {
+                SizedBox(
+                  height: size.height / 20,
+                ),
+                TextFormField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    labelText: "Branch Name*",
+                    alignLabelWithHint: true,
+                    border: outlineInputBorder,
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Name can\'t be empty';
+                    } else if (value.length > 10) {
+                      return 'Minimum length for name is 10';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: size.height / 80,
+                ),
+                TextFormField(
+                  controller: desController,
+                  maxLines: 2,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: InputDecoration(
+                    labelText: "Description",
+                    alignLabelWithHint: true,
+                    border: outlineInputBorder,
+                  ),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "Description can\'t be empty";
+                    }
                     return null;
-                  }
-                },
-              ),
-              SizedBox(
-                height: size.height / 80,
-              ),
-              TextFormField(
-                controller: desController,
-                maxLines: 2,
-                textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  labelText: "Description",
-                  alignLabelWithHint: true,
-                  border: outlineInputBorder,
+                  },
                 ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return "Description can\'t be empty";
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(
-                height: size.height / 40,
-              ),
-              FlatButton(
-                onPressed: () {
-                  if (_fKey.currentState.validate()) {
-                    createBranch(nameController.text, desController.text);
-                    Navigator.pop(context);
-                  }
-                },
-                color: darkColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                SizedBox(
+                  height: size.height / 40,
                 ),
-                child: Text(
-                  'Create',
-                  style: TextStyle(
-                    color: Colors.white,
+                FlatButton(
+                  onPressed: () {
+                    if (_fKey.currentState.validate()) {
+                      createBranch(nameController.text, desController.text);
+                      Navigator.pop(context);
+                    }
+                  },
+                  color: darkColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    'Create',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
