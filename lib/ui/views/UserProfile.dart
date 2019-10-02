@@ -1,8 +1,7 @@
 import 'package:bank_management/provider/AppProvider.dart';
-import 'package:bank_management/ui/Login/Login.dart';
 import 'package:bank_management/utils/Style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class UserProfile extends StatefulWidget {
@@ -36,18 +35,43 @@ class _UserProfileState extends State<UserProfile> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: ListView(
+        shrinkWrap: true,
         physics: BouncingScrollPhysics(),
-        child: Column(
-          children: <Widget>[
-            Text(provider.getUser.name),
-            Divider(
-              color: darkColor,
-              endIndent: 10,
-              indent: 10,
+        children: <Widget>[
+          Text(
+            provider.getUser.name,
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 30,
             ),
-          ],
-        ),
+            textAlign: TextAlign.center,
+          ),
+          ListTile(
+            title: Text('Number of branches'),
+            trailing: Text(provider.getUser.branches.toString()),
+          ),
+          ListTile(
+            title: Text('Balance'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Icon(FontAwesomeIcons.rupeeSign),
+                Text(provider.getUser.balance.toString()),
+              ],
+            ),
+          ),
+          ListTile(
+            title: Text('Unadded Money'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Icon(FontAwesomeIcons.rupeeSign),
+                Text(provider.getUser.addAmount.toString()),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

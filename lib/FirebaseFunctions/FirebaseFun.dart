@@ -97,11 +97,19 @@ Future<User> getUserDetails() async {
       .collection('users')
       .document(await getUid())
       .get();
+  DocumentSnapshot doc = await documentSnapshot.reference
+      .collection('branches')
+      .document('master')
+      .get();
+  int addAmount = await getAddAmount();
   User user = User(
     documentSnapshot.data['name'],
     documentSnapshot.data['uid'],
     documentSnapshot.data['phone'],
     documentSnapshot.data['email'],
+    (await getBranches()).length,
+    doc.data['balance'],
+    addAmount,
   );
   return user;
 }
@@ -124,7 +132,6 @@ Future<int> getBranchBalance(String branch) async {
       .get();
   return documentSnapshot.data['balance'];
 }
-
 
 Future<int> getAddAmount() async {
   int maxAmount = 0,
@@ -153,6 +160,9 @@ void createBranch(String name, String description) async {
         .millisecondsSinceEpoch,
     'transactions': 0,
     'desc': description,
+  });
+  Firestore.instance.collection('users').document(await getUid()).updateData({
+    'branches': (await getBranches()).length + 1,
   });
 }
 

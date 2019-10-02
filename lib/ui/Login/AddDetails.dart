@@ -27,7 +27,14 @@ class _AddDetailsState extends State<AddDetails> {
 
   register(BuildContext context) {
     User user = User(
-        nameController.text, uid, widget.phoneNumber, emailController.text);
+      nameController.text,
+      uid,
+      widget.phoneNumber,
+      emailController.text,
+      1,
+      0,
+      0,
+    );
     registerUser(user);
     Navigator.pushReplacement(
       context,
