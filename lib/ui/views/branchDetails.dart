@@ -1,6 +1,7 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
-import 'package:bank_management/ui/Widgets/customAlertDialog.dart';
+import 'package:bank_management/ui/Widgets/customAlertDialogBranch.dart';
+import 'package:bank_management/ui/Widgets/customAlertDialogMaster.dart';
 import 'package:bank_management/ui/views/payNow.dart';
 import 'package:bank_management/ui/Widgets/customFilterSheet.dart';
 import 'package:bank_management/ui/Widgets/transactionList.dart';
@@ -35,17 +36,36 @@ class _branchDetailsState extends State<branchDetails>
   }
 
   showAddSheet(BuildContext context) {
+    scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text('Getting data'),
+        duration: Duration(seconds: 1),
+      ),
+    );
     getAddAmount().then((value) {
-      showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (context) {
-          return customAlertDialog(
-            branch: widget.snapshot.documentID,
-            money: value,
-          );
-        },
-      );
+      if (widget.snapshot.documentID == 'master') {
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (context) {
+            return customAlertDialogMaster(
+              branch: widget.snapshot.documentID,
+              money: value,
+            );
+          },
+        );
+      } else {
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (context) {
+            return customAlertDialogBranch(
+              branch: widget.snapshot.documentID,
+              money: value,
+            );
+          },
+        );
+      }
     });
   }
 
@@ -110,9 +130,8 @@ class _branchDetailsState extends State<branchDetails>
                     SizedBox(
                       width: 5,
                     ),
-                    StreamBuilder(
-                      stream: getBranchBalance(widget.snapshot.documentID)
-                          .asStream(),
+                    FutureBuilder(
+                      future: getBranchBalance(widget.snapshot.documentID),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return Text(
@@ -136,7 +155,7 @@ class _branchDetailsState extends State<branchDetails>
                   ],
                 ),
                 Text(
-                  'Available Balance',
+                  'Balance',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -182,7 +201,9 @@ class _branchDetailsState extends State<branchDetails>
               color: Colors.white,
               shape: roundedRectangleBorder,
               child: Text(
-                'Add Money',
+                widget.snapshot.documentID == 'master'
+                    ? 'Add Money'
+                    : 'Update Money',
                 style: TextStyle(
                   color: darkColor,
                   fontSize: 16,

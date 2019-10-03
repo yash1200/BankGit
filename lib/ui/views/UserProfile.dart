@@ -1,5 +1,6 @@
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/utils/Style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,10 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  var textStyle = TextStyle(
+    fontSize: 18,
+  );
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppProvider>(context);
@@ -39,6 +44,31 @@ class _UserProfileState extends State<UserProfile> {
         shrinkWrap: true,
         physics: BouncingScrollPhysics(),
         children: <Widget>[
+          SizedBox(
+            height: size.height / 60,
+          ),
+          Container(
+            height: size.height / 5,
+            width: size.height / 5,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                width: 1.5,
+                color: darkColor,
+              ),
+            ),
+            child: Text(
+              provider.getUser.branches.toString(),
+              style: TextStyle(
+                fontSize: size.height / 14,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height / 40,
+          ),
           Text(
             provider.getUser.name,
             style: TextStyle(
@@ -47,27 +77,38 @@ class _UserProfileState extends State<UserProfile> {
             ),
             textAlign: TextAlign.center,
           ),
-          ListTile(
-            title: Text('Number of branches'),
-            trailing: Text(provider.getUser.branches.toString()),
+          SizedBox(
+            height: size.height / 40,
           ),
           ListTile(
-            title: Text('Balance'),
+            title: Text(
+              'Balance',
+              style: textStyle,
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Icon(FontAwesomeIcons.rupeeSign),
-                Text(provider.getUser.balance.toString()),
+                Text(
+                  provider.getUser.balance.toString(),
+                  style: textStyle,
+                ),
               ],
             ),
           ),
           ListTile(
-            title: Text('Unadded Money'),
+            title: Text(
+              'Unadded Money',
+              style: textStyle,
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Icon(FontAwesomeIcons.rupeeSign),
-                Text(provider.getUser.addAmount.toString()),
+                Text(
+                  provider.getUser.addAmount.toString(),
+                  style: textStyle,
+                ),
               ],
             ),
           ),

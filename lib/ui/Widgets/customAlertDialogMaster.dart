@@ -2,17 +2,18 @@ import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/material.dart';
 
-class customAlertDialog extends StatefulWidget {
+class customAlertDialogMaster extends StatefulWidget {
   String branch;
   int money;
 
-  customAlertDialog({this.branch, this.money});
+  customAlertDialogMaster({this.branch, this.money});
 
   @override
-  _customAlertDialogState createState() => _customAlertDialogState();
+  _customAlertDialogMasterState createState() =>
+      _customAlertDialogMasterState();
 }
 
-class _customAlertDialogState extends State<customAlertDialog> {
+class _customAlertDialogMasterState extends State<customAlertDialogMaster> {
   TextEditingController amountController = TextEditingController();
   var _fkey = GlobalKey<FormState>();
 

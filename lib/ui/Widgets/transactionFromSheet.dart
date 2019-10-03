@@ -20,8 +20,7 @@ class _transactionFromState extends State<transactionFrom> {
             shrinkWrap: true,
             itemCount: snapshot.data.length,
             itemBuilder: (context, index) {
-              if (snapshot.data[index].documentID != 'master' &&
-                  snapshot.data[index].documentID != provider.transactionTo) {
+              if (snapshot.data[index].documentID != 'master') {
                 return RadioListTile(
                   value: index,
                   groupValue: provider.transactionFromIndex,
@@ -29,8 +28,9 @@ class _transactionFromState extends State<transactionFrom> {
                     provider.setTransactionFromIndex(index);
                     provider
                         .setTransactionFrom(snapshot.data[index].documentID);
-                    provider.setTransactionFromBalance(await getBranchBalance(
-                        snapshot.data[index].documentID));
+                    provider.setTransactionFromBalance(
+                      await getBranchBalance(snapshot.data[index].documentID),
+                    );
                     Navigator.pop(context);
                   },
                   title: Text(

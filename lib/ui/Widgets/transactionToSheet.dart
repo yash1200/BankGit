@@ -20,8 +20,7 @@ class _transactionToState extends State<transactionTo> {
             shrinkWrap: true,
             itemCount: snapshot.data.length,
             itemBuilder: (context, index) {
-              if (snapshot.data[index].documentID != 'master' &&
-                  snapshot.data[index].documentID != provider.transactionFrom) {
+              if (snapshot.data[index].documentID != 'master') {
                 return RadioListTile(
                   value: index,
                   groupValue: provider.transactionToIndex,

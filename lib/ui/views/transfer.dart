@@ -15,6 +15,7 @@ class _transferState extends State<transfer> {
   TextEditingController amountController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   var _fkey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   showTransactionFrom(BuildContext context) {
     showModalBottomSheet(
@@ -44,6 +45,7 @@ class _transferState extends State<transfer> {
         .size;
     return Scaffold(
       backgroundColor: Colors.white,
+      key: _scaffoldKey,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -196,7 +198,8 @@ class _transferState extends State<transfer> {
             ),
             FlatButton(
               onPressed: () {
-                if (_fkey.currentState.validate()) {
+                if (_fkey.currentState.validate() &&
+                    provider.transactionFrom != provider.transactionTo) {
                   addMoney(
                     provider.transactionTo,
                     int.parse(amountController.text),
@@ -208,6 +211,16 @@ class _transferState extends State<transfer> {
                     'To ${provider.transactionTo}',
                   );
                   Navigator.pop(context);
+                } else {
+                  if (provider.transactionTo == provider.transactionFrom) {
+                    _scaffoldKey.currentState.showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Transaction from and to fields are same',
+                        ),
+                      ),
+                    );
+                  }
                 }
               },
               shape: roundedRectangleBorder,

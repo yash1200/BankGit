@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 class transactionPage extends StatefulWidget {

@@ -37,139 +37,145 @@ class _CustomDrawerState extends State<CustomDrawer> {
     final provider = Provider.of<AppProvider>(context);
     var size = MediaQuery.of(context).size;
     user = provider.getUser;
-    return Column(
-      children: <Widget>[
-        GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return UserProfile();
-                },
-              ),
-            );
-          },
-          child: UserAccountsDrawerHeader(
-            accountName: Text(user.name),
-            accountEmail: Text(user.email),
-            currentAccountPicture: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.lightBlueAccent,
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                user.name[0].toUpperCase(),
-                style: defaultTextStyle,
+    if (user != null) {
+      return Column(
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return UserProfile();
+                  },
+                ),
+              );
+            },
+            child: UserAccountsDrawerHeader(
+              accountName: Text(user.name),
+              accountEmail: Text(user.email),
+              currentAccountPicture: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.lightBlueAccent,
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  user.name[0].toUpperCase(),
+                  style: defaultTextStyle,
+                ),
               ),
             ),
           ),
-        ),
-        ListTile(
-          title: Text(
-            'Create New Branch',
-            style: defaultTextStyle,
+          ListTile(
+            title: Text(
+              'Create New Branch',
+              style: defaultTextStyle,
+            ),
+            leading: Image.asset(
+              'assets/rupees.png',
+              height: size.height / 22,
+              width: size.height / 22,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return CreateBranch();
+                  },
+                ),
+              );
+            },
           ),
-          leading: Image.asset(
-            'assets/rupees.png',
-            height: size.height / 22,
-            width: size.height / 22,
+          ListTile(
+            title: Text(
+              'Branches',
+              style: defaultTextStyle,
+            ),
+            leading: Image.asset(
+              'assets/circuit.png',
+              height: size.height / 22,
+              width: size.height / 22,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Branches();
+                  },
+                ),
+              );
+            },
           ),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return CreateBranch();
-                },
-              ),
-            );
-          },
-        ),
-        ListTile(
-          title: Text(
-            'Branches',
-            style: defaultTextStyle,
+          ListTile(
+            title: Text(
+              'Transfer',
+              style: defaultTextStyle,
+            ),
+            leading: Image.asset(
+              'assets/transfer.png',
+              height: size.height / 22,
+              width: size.height / 22,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return transfer();
+                  },
+                ),
+              );
+            },
           ),
-          leading: Image.asset(
-            'assets/circuit.png',
-            height: size.height / 22,
-            width: size.height / 22,
+          ListTile(
+            title: Text(
+              'Help',
+              style: defaultTextStyle,
+            ),
+            leading: Image.asset(
+              'assets/question.png',
+              height: size.height / 22,
+              width: size.height / 22,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Help();
+                  },
+                ),
+              );
+            },
           ),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return Branches();
-                },
-              ),
-            );
-          },
-        ),
-        ListTile(
-          title: Text(
-            'Transfer',
-            style: defaultTextStyle,
+          ListTile(
+            title: Text(
+              'Log Out',
+              style: defaultTextStyle,
+            ),
+            leading: Image.asset(
+              'assets/exit.png',
+              height: size.height / 22,
+              width: size.height / 22,
+            ),
+            onTap: () {
+              _signOut(context);
+            },
           ),
-          leading: Image.asset(
-            'assets/transfer.png',
-            height: size.height / 22,
-            width: size.height / 22,
-          ),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return transfer();
-                },
-              ),
-            );
-          },
-        ),
-        ListTile(
-          title: Text(
-            'Help',
-            style: defaultTextStyle,
-          ),
-          leading: Image.asset(
-            'assets/question.png',
-            height: size.height / 22,
-            width: size.height / 22,
-          ),
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return Help();
-                },
-              ),
-            );
-          },
-        ),
-        ListTile(
-          title: Text(
-            'Log Out',
-            style: defaultTextStyle,
-          ),
-          leading: Image.asset(
-            'assets/exit.png',
-            height: size.height / 22,
-            width: size.height / 22,
-          ),
-          onTap: () {
-            _signOut(context);
-          },
-        ),
-      ],
-    );
+        ],
+      );
+    } else {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
   }
 }
