@@ -217,6 +217,12 @@ class _transferState extends State<transfer> {
                       SnackBar(
                         content: Text(
                           'Transaction from and to fields are same',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        duration: Duration(
+                          milliseconds: 1500,
                         ),
                       ),
                     );

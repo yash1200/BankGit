@@ -12,12 +12,14 @@ class _CreateBranchState extends State<CreateBranch> {
   var _fKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController desController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
+      key: _scaffoldKey,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -97,6 +99,16 @@ class _CreateBranchState extends State<CreateBranch> {
                   onPressed: () {
                     if (_fKey.currentState.validate()) {
                       createBranch(nameController.text, desController.text);
+                      _scaffoldKey.currentState.showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Creating new branch',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      );
                       Navigator.pop(context);
                     }
                   },

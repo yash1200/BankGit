@@ -161,8 +161,22 @@ void createBranch(String name, String description) async {
     'transactions': 0,
     'desc': description,
   });
+  updateBranchCount();
+}
+
+void deleteBranch(String name) async {
+  Firestore.instance
+      .collection('users')
+      .document(await getUid())
+      .collection('branches')
+      .document(name)
+      .delete();
+  updateBranchCount();
+}
+
+void updateBranchCount() async {
   Firestore.instance.collection('users').document(await getUid()).updateData({
-    'branches': (await getBranches()).length + 1,
+    'branches': (await getBranches()).length,
   });
 }
 
