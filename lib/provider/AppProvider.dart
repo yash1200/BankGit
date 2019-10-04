@@ -6,6 +6,7 @@ class AppProvider with ChangeNotifier {
   User _user;
   int _transactionIndex = 0;
   var _upiType;
+  int _paymentMode = 0;
   String _transactionFrom = 'Not Selected',
       _transactionTo = 'Not Selected';
   int _transactionFromIndex = 0,
@@ -67,4 +68,12 @@ class AppProvider with ChangeNotifier {
     _transactionFromBalance = value;
     notifyListeners();
   }
+
+  int get paymentMode => _paymentMode;
+
+  setPaymentMode(int value) {
+    _paymentMode = value;
+    notifyListeners();
+  }
+
 }
