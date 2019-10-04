@@ -1,7 +1,7 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Widgets/customAlertDialogBranch.dart';
-import 'package:bank_management/ui/Widgets/customAlertDialogMaster.dart';
+import 'package:bank_management/ui/Widgets/customAlertDialog.dart';
 import 'package:bank_management/ui/views/payNow.dart';
 import 'package:bank_management/ui/Widgets/customFilterSheet.dart';
 import 'package:bank_management/ui/Widgets/transactionList.dart';
@@ -24,6 +24,7 @@ class branchDetails extends StatefulWidget {
 class _branchDetailsState extends State<branchDetails>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  var choices = ['Delete Branch'];
 
   showFilterSheet(BuildContext context) {
     showModalBottomSheet(
@@ -100,6 +101,35 @@ class _branchDetailsState extends State<branchDetails>
             color: darkColor,
           ),
         ),
+        actions: <Widget>[
+          PopupMenuButton(
+            icon: Icon(
+              Icons.more_vert,
+              color: darkColor,
+            ),
+            elevation: 2,
+            onSelected: (value) {
+              switch (value) {
+                case 'Delete':
+                  deleteBranch(widget.snapshot.documentID);
+                  Navigator.pop(context);
+                  break;
+                default:
+                  print('Non selected');
+              }
+            },
+            itemBuilder: (context) {
+              return choices.map(
+                    (String choice) {
+                  return PopupMenuItem(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                },
+              ).toList();
+            },
+          ),
+        ],
       ),
       body: ListView(
         shrinkWrap: true,

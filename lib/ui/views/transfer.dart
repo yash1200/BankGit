@@ -1,5 +1,6 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
+import 'package:bank_management/ui/Widgets/imageWidget.dart';
 import 'package:bank_management/ui/Widgets/transactionFromSheet.dart';
 import 'package:bank_management/ui/Widgets/transactionToSheet.dart';
 import 'package:bank_management/utils/Style.dart';
@@ -78,11 +79,7 @@ class _transferState extends State<transfer> {
             SizedBox(
               height: size.height / 40,
             ),
-            Image.asset(
-              'assets/money.png',
-              height: size.height / 8,
-              width: size.height / 8,
-            ),
+            CustomImage('assets/money.png'),
             SizedBox(
               height: size.height / 40,
             ),

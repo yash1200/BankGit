@@ -1,5 +1,6 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
+import 'package:bank_management/ui/Widgets/imageWidget.dart';
 import 'package:bank_management/ui/Widgets/paymentSheet.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,7 +40,6 @@ class _payNowState extends State<payNow> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final provider = Provider.of<AppProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -68,6 +68,10 @@ class _payNowState extends State<payNow> {
           padding: EdgeInsets.only(left: 10, right: 10),
           child: Column(
             children: <Widget>[
+              SizedBox(
+                height: size.height / 40,
+              ),
+              CustomImage('assets/payment.png'),
               SizedBox(
                 height: size.height / 40,
               ),

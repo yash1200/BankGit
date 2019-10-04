@@ -1,4 +1,5 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
+import 'package:bank_management/ui/Widgets/imageWidget.dart';
 import 'package:bank_management/ui/views/branchDetails.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -48,11 +49,7 @@ class _BranchesState extends State<Branches> {
                     SizedBox(
                       height: size.height / 40,
                     ),
-                    Image.asset(
-                      'assets/data.png',
-                      height: size.height / 8,
-                      width: size.height / 8,
-                    ),
+                    CustomImage('assets/data.png'),
                     SizedBox(
                       height: size.height / 40,
                     ),
