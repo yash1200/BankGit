@@ -1,9 +1,11 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
+import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Widgets/imageWidget.dart';
 import 'package:bank_management/ui/views/branchDetails.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Branches extends StatefulWidget {
   @override

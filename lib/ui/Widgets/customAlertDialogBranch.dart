@@ -100,7 +100,7 @@ class _customAlertDialogBranchState extends State<customAlertDialogBranch> {
                   child: Container(
                     padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
                     child: Text(
-                      'Dedit',
+                      'Debit',
                       style: TextStyle(
                         color:
                         provider.paymentMode == 0 ? darkColor : Colors.blue,

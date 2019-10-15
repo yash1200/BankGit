@@ -1,4 +1,5 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
+import 'package:bank_management/ui/Widgets/imageWidget.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,11 +49,7 @@ class _CreateBranchState extends State<CreateBranch> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset(
-                  'assets/sun.png',
-                  height: size.height / 5,
-                  width: size.height / 5,
-                ),
+                CustomImage('assets/sun.png'),
                 SizedBox(
                   height: size.height / 20,
                 ),

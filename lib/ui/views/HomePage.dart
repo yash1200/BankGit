@@ -1,5 +1,6 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
+import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Drawer/CustomDrawer.dart';
@@ -24,12 +25,26 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Branch'),
-      ),
-      drawer: Drawer(
-        child: CustomDrawer(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            'Bank Git',
+            style: TextStyle(
+              color: darkColor,
+            ),
+          ),
+          iconTheme: IconThemeData(
+            color: darkColor,
+          ),
+        ),
+        drawer: Drawer(
+          elevation: 2,
+          child: CustomDrawer(),
+        ),
       ),
     );
   }

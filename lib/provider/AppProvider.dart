@@ -75,5 +75,4 @@ class AppProvider with ChangeNotifier {
     _paymentMode = value;
     notifyListeners();
   }
-
 }

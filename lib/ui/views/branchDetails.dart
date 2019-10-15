@@ -110,7 +110,7 @@ class _branchDetailsState extends State<branchDetails>
             elevation: 2,
             onSelected: (value) {
               switch (value) {
-                case 'Delete':
+                case 'Delete Branch':
                   deleteBranch(widget.snapshot.documentID);
                   Navigator.pop(context);
                   break;
