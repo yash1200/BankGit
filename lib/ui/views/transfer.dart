@@ -16,6 +16,7 @@ class _transferState extends State<transfer> {
   TextEditingController amountController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   var _fkey = GlobalKey<FormState>();
+  Duration _duration = Duration(milliseconds: 1500);
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   showTransactionFrom(BuildContext context) {
@@ -196,7 +197,9 @@ class _transferState extends State<transfer> {
             FlatButton(
               onPressed: () {
                 if (_fkey.currentState.validate() &&
-                    provider.transactionFrom != provider.transactionTo) {
+                    provider.transactionFrom != provider.transactionTo &&
+                    provider.transactionFrom != 'Not Selected' &&
+                    provider.transactionTo != 'Not Selected') {
                   addMoney(
                     provider.transactionTo,
                     int.parse(amountController.text),
@@ -209,7 +212,8 @@ class _transferState extends State<transfer> {
                   );
                   Navigator.pop(context);
                 } else {
-                  if (provider.transactionTo == provider.transactionFrom) {
+                  if (provider.transactionTo == provider.transactionFrom &&
+                      provider.transactionTo != 'Not Selected') {
                     _scaffoldKey.currentState.showSnackBar(
                       SnackBar(
                         content: Text(
@@ -218,9 +222,21 @@ class _transferState extends State<transfer> {
                             fontSize: 16,
                           ),
                         ),
-                        duration: Duration(
-                          milliseconds: 1500,
-                        ),
+                        duration: _duration,
+                      ),
+                    );
+                  } else if (provider.transactionTo == 'Not Selected') {
+                    _scaffoldKey.currentState.showSnackBar(
+                      SnackBar(
+                        content: Text('Transaction to field is not selected'),
+                        duration: _duration,
+                      ),
+                    );
+                  } else if (provider.transactionFrom == 'Not Selected') {
+                    _scaffoldKey.currentState.showSnackBar(
+                      SnackBar(
+                        content: Text('Transaction from field is not selected'),
+                        duration: _duration,
                       ),
                     );
                   }
