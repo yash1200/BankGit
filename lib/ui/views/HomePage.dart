@@ -3,6 +3,7 @@ import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pie_chart/pie_chart.dart';
 import '../Drawer/CustomDrawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,11 +12,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Map<String, double> dataMap = Map();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setMap();
+  }
+
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     setUser(context);
+  }
+
+  void setMap() {
+    getBalanceMap().then((value) {
+      setState(() {
+        dataMap = value;
+      });
+    });
   }
 
   setUser(BuildContext context) async {
@@ -25,25 +43,57 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
+    var size = MediaQuery
+        .of(context)
+        .size;
+    return Container(
+      color: darkColor,
+      child: SafeArea(
+        child: Scaffold(
           backgroundColor: Colors.white,
-          elevation: 0,
-          title: Text(
-            'Bank Git',
-            style: TextStyle(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: Text(
+              'Bank Git',
+              style: TextStyle(
+                color: darkColor,
+              ),
+            ),
+            iconTheme: IconThemeData(
               color: darkColor,
             ),
           ),
-          iconTheme: IconThemeData(
-            color: darkColor,
+          drawer: Drawer(
+            elevation: 2,
+            child: CustomDrawer(),
           ),
-        ),
-        drawer: Drawer(
-          elevation: 2,
-          child: CustomDrawer(),
+          body: Column(
+            children: <Widget>[
+              SizedBox(
+                height: size.height / 40,
+              ),
+              FutureBuilder(
+                future: getBalanceMap(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return PieChart(
+                      dataMap: snapshot.data,
+                      legendFontColor: darkColor,
+                      legendFontWeight: FontWeight.w400,
+                      legendFontSize: 16,
+                      chartRadius: size.width / 2.3,
+                      chartValuesColor: darkColor,
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

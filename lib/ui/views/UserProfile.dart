@@ -1,8 +1,10 @@
+import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:provider/provider.dart';
 
 class UserProfile extends StatefulWidget {
@@ -111,6 +113,41 @@ class _UserProfileState extends State<UserProfile> {
                 ),
               ],
             ),
+          ),
+          ListTile(
+            title: Text(
+              'Number of branches',
+              style: textStyle,
+            ),
+            trailing: Text(
+              provider.getUser.branches.toString(),
+              style: textStyle,
+            ),
+          ),
+          ListTile(
+            title: Text(
+              'Graph Pictorial',
+              style: textStyle,
+            ),
+          ),
+          FutureBuilder(
+            future: getBalanceMap(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return PieChart(
+                  dataMap: snapshot.data,
+                  legendFontColor: darkColor,
+                  legendFontWeight: FontWeight.w400,
+                  legendFontSize: 16,
+                  chartRadius: size.width / 2.3,
+                  chartValuesColor: darkColor,
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
           ),
         ],
       ),

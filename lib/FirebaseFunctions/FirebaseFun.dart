@@ -89,7 +89,7 @@ void registerUser(User user) {
     'uid': user.uid,
     'branches': 1,
   });
-  createBranch('master', 'Master Branch');
+  createBranch('Master', 'Master Branch');
 }
 
 Future<User> getUserDetails() async {
@@ -145,6 +145,23 @@ Future<int> getAddAmount() async {
     }
   }
   return maxAmount - addAmount;
+}
+
+Future<Map<String, double>> getBalanceMap() async {
+  Map<String, double> dataMap = Map();
+  getAddAmount().then((value) {
+    dataMap.putIfAbsent('others', () => double.parse(value.toString()));
+  });
+  List<DocumentSnapshot> documentList = await getBranches();
+  for (int i = 0; i < documentList.length; i++) {
+    if (documentList[i].documentID != 'master') {
+      dataMap.putIfAbsent(
+        documentList[i].documentID,
+            () => double.parse(documentList[i].data['balance'].toString()),
+      );
+    }
+  }
+  return dataMap;
 }
 
 void createBranch(String name, String description) async {
