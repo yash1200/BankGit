@@ -17,6 +17,35 @@ class _UserProfileState extends State<UserProfile> {
     fontSize: 18,
   );
 
+  alertBox() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('You want to delete your account?'),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('No'),
+            ),
+            FlatButton(
+              onPressed: () {
+                deleteUser(context);
+              },
+              child: Text('Yes'),
+            ),
+          ],
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppProvider>(context);
@@ -126,7 +155,7 @@ class _UserProfileState extends State<UserProfile> {
           ),
           ListTile(
             title: Text(
-              'Graph Pictorial',
+              'Chart Pictorial',
               style: textStyle,
             ),
           ),
@@ -148,6 +177,25 @@ class _UserProfileState extends State<UserProfile> {
                 );
               }
             },
+          ),
+          SizedBox(
+            height: size.height / 80,
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: size.width / 5,
+              right: size.width / 5,
+            ),
+            child: FlatButton(
+              onPressed: () {
+                alertBox();
+              },
+              shape: roundedRectangleBorder,
+              child: Text('Delete Account'),
+            ),
+          ),
+          SizedBox(
+            height: size.height / 80,
           ),
         ],
       ),

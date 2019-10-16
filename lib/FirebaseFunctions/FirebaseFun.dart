@@ -1,4 +1,5 @@
 import 'package:bank_management/model/user.dart';
+import 'package:bank_management/ui/Login/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -90,6 +91,19 @@ void registerUser(User user) {
     'branches': 1,
   });
   createBranch('Master', 'Master Branch');
+}
+
+void deleteUser(BuildContext context) async {
+  Firestore.instance.collection('user').document(await getUid()).delete();
+  FirebaseAuth.instance.signOut();
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) {
+        return Login();
+      },
+    ),
+  );
 }
 
 Future<User> getUserDetails() async {

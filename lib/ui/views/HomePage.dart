@@ -13,6 +13,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Map<String, double> dataMap = Map();
+  var textStyle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: darkColor,
+  );
 
   @override
   void initState() {
@@ -68,31 +73,37 @@ class _HomePageState extends State<HomePage> {
             elevation: 2,
             child: CustomDrawer(),
           ),
-          body: Column(
-            children: <Widget>[
-              SizedBox(
-                height: size.height / 40,
-              ),
-              FutureBuilder(
-                future: getBalanceMap(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return PieChart(
-                      dataMap: snapshot.data,
-                      legendFontColor: darkColor,
-                      legendFontWeight: FontWeight.w400,
-                      legendFontSize: 16,
-                      chartRadius: size.width / 2.3,
-                      chartValuesColor: darkColor,
-                    );
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              )
-            ],
+          body: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    'Chart Pictorial',
+                    style: textStyle,
+                  ),
+                ),
+                FutureBuilder(
+                  future: getBalanceMap(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return PieChart(
+                        dataMap: snapshot.data,
+                        legendFontColor: darkColor,
+                        legendFontWeight: FontWeight.w400,
+                        legendFontSize: 16,
+                        chartRadius: size.width / 2.3,
+                        chartValuesColor: darkColor,
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

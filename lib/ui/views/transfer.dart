@@ -216,12 +216,8 @@ class _transferState extends State<transfer> {
                       provider.transactionTo != 'Not Selected') {
                     _scaffoldKey.currentState.showSnackBar(
                       SnackBar(
-                        content: Text(
-                          'Transaction from and to fields are same',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
+                        content:
+                        Text('Transaction from and to fields are same'),
                         duration: _duration,
                       ),
                     );
