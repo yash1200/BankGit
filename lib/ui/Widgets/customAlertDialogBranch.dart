@@ -149,7 +149,7 @@ class _customAlertDialogBranchState extends State<customAlertDialogBranch> {
                 ),
               ),
               child: Text(
-                'Add',
+                'Update',
                 style: TextStyle(color: darkColor),
               ),
             ),

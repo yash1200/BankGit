@@ -235,9 +235,7 @@ class _branchDetailsState extends State<branchDetails>
               color: Colors.white,
               shape: roundedRectangleBorder,
               child: Text(
-                widget.snapshot.documentID == 'master'
-                    ? 'Add Money'
-                    : 'Update Money',
+                'Update Money',
                 style: TextStyle(
                   color: darkColor,
                   fontSize: 16,
