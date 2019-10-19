@@ -76,46 +76,51 @@ class _BranchesState extends State<Branches> {
                         mainAxisSpacing: 10,
                       ),
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return branchDetails(
-                                    snapshot: snapshot.data[index],
-                                  );
-                                },
+                        return Hero(
+                          tag: snapshot.data[index].documentID,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return branchDetails(
+                                      snapshot: snapshot.data[index],
+                                      gradientContainer:
+                                      grads[index % (grads.length)],
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: size.width / 2,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: grads[index % (grads.length)],
                               ),
-                            );
-                          },
-                          child: Container(
-                            width: size.width / 2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              gradient: grads[index],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Image.asset(
-                                  'assets/circuit.png',
-                                  height: size.height / 10,
-                                  width: size.height / 10,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  snapshot.data[index].documentID,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w300,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Image.asset(
+                                    'assets/circuit.png',
+                                    height: size.height / 10,
+                                    width: size.height / 10,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    snapshot.data[index].documentID,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

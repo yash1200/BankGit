@@ -14,8 +14,9 @@ import 'package:provider/provider.dart';
 
 class branchDetails extends StatefulWidget {
   DocumentSnapshot snapshot;
+  Gradient gradientContainer;
 
-  branchDetails({this.snapshot});
+  branchDetails({this.snapshot, this.gradientContainer});
 
   @override
   _branchDetailsState createState() => _branchDetailsState();
@@ -139,60 +140,63 @@ class _branchDetailsState extends State<branchDetails>
           SizedBox(
             height: size.height / 40,
           ),
-          Container(
-            height: size.height / 5,
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: darkColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            width: size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      FontAwesomeIcons.rupeeSign,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    FutureBuilder(
-                      future: getBranchBalance(widget.snapshot.documentID),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Text(
-                            snapshot.data.toString(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                            ),
-                          );
-                        } else {
-                          return Text(
-                            '0',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),
-                Text(
-                  'Balance',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
+          Hero(
+            tag: widget.snapshot.documentID,
+            child: Container(
+              height: size.height / 5,
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                gradient: widget.gradientContainer,
+              ),
+              width: size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        FontAwesomeIcons.rupeeSign,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      FutureBuilder(
+                        future: getBranchBalance(widget.snapshot.documentID),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(
+                              snapshot.data.toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                              ),
+                            );
+                          } else {
+                            return Text(
+                              '0',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  Text(
+                    'Balance',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(

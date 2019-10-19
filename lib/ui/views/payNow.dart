@@ -61,102 +61,104 @@ class _payNowState extends State<payNow> {
           ),
         ),
       ),
-      body: Form(
-        key: _fkey,
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.only(left: 10, right: 10),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: size.height / 40,
-              ),
-              CustomImage('assets/payment.png'),
-              SizedBox(
-                height: size.height / 40,
-              ),
-              Text(
-                'From: ${widget.snapshot.documentID}',
-                style: TextStyle(
-                  color: darkColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 25,
+      body: Center(
+        child: Form(
+          key: _fkey,
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: size.height / 40,
                 ),
-              ),
-              SizedBox(
-                height: size.height / 40,
-              ),
-              TextFormField(
-                controller: phoneController,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Number can\'t be empty';
-                  } else if (value.length != 10) {
-                    return 'Number is invalid';
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Phone Number',
-                  alignLabelWithHint: true,
-                  border: outlineInputBorder,
+                CustomImage('assets/payment.png'),
+                SizedBox(
+                  height: size.height / 40,
                 ),
-              ),
-              SizedBox(
-                height: size.height / 40,
-              ),
-              TextFormField(
-                controller: amountController,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Amount can\'t be empty';
-                  } else if (double.parse(value) >
-                      widget.snapshot.data['balance']) {
-                    return 'Amount is large';
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Amount',
-                  alignLabelWithHint: true,
-                  border: outlineInputBorder,
+                Text(
+                  'From: ${widget.snapshot.documentID}',
+                  style: TextStyle(
+                    color: darkColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 25,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: size.height / 40,
-              ),
-              TextFormField(
-                controller: descriptionController,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Payment Description Needed';
-                  } else if (value.length > 15) {
-                    return 'Payment Description Large';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: 'Description',
-                  alignLabelWithHint: true,
-                  border: outlineInputBorder,
+                SizedBox(
+                  height: size.height / 40,
                 ),
-              ),
-              SizedBox(
-                height: size.height / 40,
-              ),
-              FlatButton(
-                onPressed: () {
-                  if (_fkey.currentState.validate()) {
-                    showSheet(context);
-                  }
-                },
-                color: Colors.white,
-                shape: roundedRectangleBorder,
-                child: Text('Pay Now'),
-              ),
-            ],
+                TextFormField(
+                  controller: phoneController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Number can\'t be empty';
+                    } else if (value.length != 10) {
+                      return 'Number is invalid';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Phone Number',
+                    alignLabelWithHint: true,
+                    border: outlineInputBorder,
+                  ),
+                ),
+                SizedBox(
+                  height: size.height / 40,
+                ),
+                TextFormField(
+                  controller: amountController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Amount can\'t be empty';
+                    } else if (double.parse(value) >
+                        widget.snapshot.data['balance']) {
+                      return 'Amount is large';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Amount',
+                    alignLabelWithHint: true,
+                    border: outlineInputBorder,
+                  ),
+                ),
+                SizedBox(
+                  height: size.height / 40,
+                ),
+                TextFormField(
+                  controller: descriptionController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Payment Description Needed';
+                    } else if (value.length > 15) {
+                      return 'Payment Description Large';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                    alignLabelWithHint: true,
+                    border: outlineInputBorder,
+                  ),
+                ),
+                SizedBox(
+                  height: size.height / 40,
+                ),
+                FlatButton(
+                  onPressed: () {
+                    if (_fkey.currentState.validate()) {
+                      showSheet(context);
+                    }
+                  },
+                  color: Colors.white,
+                  shape: roundedRectangleBorder,
+                  child: Text('Pay Now'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
