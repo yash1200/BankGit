@@ -15,11 +15,64 @@
       },
       "oauth_client": [
         {
-          "client_id": "98256588908-omm11p1ga5fk0qd8dcjovnkjn2172re0.apps.googleusercontent.com",
+          "client_id": "98256588908-53qabgq57b5h271dpgj793kuhk1dv35n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.bank_management",
-            "certificate_hash": "15d1d7456f7e5da6c40116bc654f50b9c799fbf0"
+            "certificate_hash": "aee2a00072dbd078af4d38f68c425dee4d919fcc"
+          }
+        },
+        {
+          "client_id": "98256588908-gf2cftlqj3hvbh7f7q9pv9dehgueijbb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bank_management",
+            "certificate_hash": "806846c6d901c08affd2a41d6a914c2bbf95cf71"
+          }
+        },
+        {
+          "client_id": "98256588908-cbuh63mi3lapcuqhakr2elfke56qogno.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bank_management",
+            "certificate_hash": "2c952ef2797c4b9bd06d0ff5fa2dd08bb111c532"
+          }
+        },
+        {
+          "client_id": "98256588908-l4eln8hjhos9has5s43f7re8aekisgs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOyEp1-6Bu6FVepV3XXwOyGS84xqu8j-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98256588908-l4eln8hjhos9has5s43f7re8aekisgs4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98256588908:android:43275f83ad14597afd0849",
+        "android_client_info": {
+          "package_name": "io.flutter.app.FlutterApplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98256588908-sdjjrnk6enlc321n6pqlp1v2dht4i2b9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.flutter.app.FlutterApplication",
+            "certificate_hash": "aee2a00072dbd078af4d38f68c425dee4d919fcc"
           }
         },
         {

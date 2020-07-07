@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<LoginProvider>(
-          builder: (_) => LoginProvider(),
+          create: (_) => LoginProvider(),
         ),
         ChangeNotifierProvider<AppProvider>(
-          builder: (_) => AppProvider(),
+          create: (_) => AppProvider(),
         ),
       ],
       child: MaterialApp(

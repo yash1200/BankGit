@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:bank_management/provider/LoginProvider.dart';
 
 void verifyPhoneNumber(String phone, BuildContext context) async {
-  final provider = Provider.of<LoginProvider>(context);
+  final provider = Provider.of<LoginProvider>(context,listen: false);
   var _auth = FirebaseAuth.instance;
   var _verificationId;
   print(phone);

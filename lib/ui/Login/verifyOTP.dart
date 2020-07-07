@@ -23,8 +23,8 @@ class _VerifyOtpState extends State<VerifyOtp> {
   bool isLoading = false;
 
   enterOTP(BuildContext context) {
-    final provider = Provider.of<LoginProvider>(context);
-    print(provider.getVerificationId);
+    final provider = Provider.of<LoginProvider>(context,listen: false);
+    print("Verification: "+provider.getVerificationId);
     setState(() {
       isLoading = true;
     });
@@ -91,6 +91,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                     ),
                     onTap: () {
                       if(fkey.currentState.validate()){
+                        print("Verifying OTP");
                         enterOTP(context);
                       }
                     },
