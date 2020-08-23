@@ -2,9 +2,9 @@ import 'package:bank_management/ui/Login/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_upi/flutter_upi.dart';
 import 'package:provider/provider.dart';
 import 'package:bank_management/provider/LoginProvider.dart';
+import 'package:upi_pay/upi_pay.dart';
 
 import '../model/user.dart';
 
@@ -254,24 +254,36 @@ void debitMoney(String branch, int amount, String desc) async {
   makeTransaction(branch, amount, 2, desc);
 }
 
-void makeUpiPayment(
-    String amount, String phone, String app, String desc, String branch) async {
-  String response = await FlutterUpi.initiateTransaction(
+// void makeUpiPaymentOld(
+//     String amount, String phone, String app, String desc, String branch) async {
+//   String response = await FlutterUpi.initiateTransaction(
+//     app: app,
+//     pa: "$phone@upi",
+//     pn: "Receiver Name",
+//     tr: "UniqueTransactionId",
+//     tn: "$desc",
+//     am: "$amount",
+//     cu: "INR",
+//     url: "https://www.google.com",
+//   );
+//   print("response: $response");
+//   FlutterUpiResponse flutterUpiResponse = FlutterUpiResponse(response);
+//   print("Status: ${flutterUpiResponse.Status}");
+//   if (flutterUpiResponse.Status == 'SUCCESS') {
+//     debitMoney(branch, int.parse(amount), desc);
+//   }
+// }
+
+void makeUpiPayment(String amount, String phone, UpiApplication app,
+    String desc, String branch) async {
+  UpiPay.initiateTransaction(
     app: app,
-    pa: "$phone@upi",
-    pn: "Receiver Name",
-    tr: "UniqueTransactionId",
-    tn: "$desc",
-    am: "$amount",
-    cu: "INR",
-    url: "https://www.google.com",
+    receiverUpiAddress: "$phone@upi",
+    receiverName: "Yash",
+    transactionNote: desc,
+    amount: amount,
+    transactionRef: 'ORD1215236',
   );
-  print("response: $response");
-  FlutterUpiResponse flutterUpiResponse = FlutterUpiResponse(response);
-  print("Status: ${flutterUpiResponse.Status}");
-  if (flutterUpiResponse.Status == 'SUCCESS') {
-    debitMoney(branch, int.parse(amount), desc);
-  }
 }
 
 void makeTransaction(String branch, int amount, int type, String desc) async {
