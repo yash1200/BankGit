@@ -1,4 +1,3 @@
-import 'package:bank_management/model/user.dart';
 import 'package:bank_management/ui/Login/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,19 +6,21 @@ import 'package:flutter_upi/flutter_upi.dart';
 import 'package:provider/provider.dart';
 import 'package:bank_management/provider/LoginProvider.dart';
 
+import '../model/user.dart';
+
 void verifyPhoneNumber(String phone, BuildContext context) async {
-  final provider = Provider.of<LoginProvider>(context,listen: false);
+  final provider = Provider.of<LoginProvider>(context, listen: false);
   var _auth = FirebaseAuth.instance;
   var _verificationId;
   print(phone);
   final PhoneVerificationCompleted verificationCompleted =
-      (AuthCredential phoneAuthCredential) {
+      (PhoneAuthCredential phoneAuthCredential) {
     //_auth.signInWithCredential(phoneAuthCredential);
     //provider.setIsLoggedIn(true);
   };
 
   final PhoneVerificationFailed verificationFailed =
-      (AuthException authException) {};
+      (FirebaseAuthException authException) {};
 
   final PhoneCodeSent codeSent =
       (String verificationId, [int forceResendingToken]) async {
@@ -47,14 +48,14 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
 Future<bool> signInWithPhoneNumber(
     String otp, String verificationId, BuildContext context) async {
   try {
-    final AuthCredential credential = PhoneAuthProvider.getCredential(
+    final AuthCredential credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: otp,
     );
-    AuthResult authResult =
+    UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
-    FirebaseUser user = authResult.user;
-    final FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
+    User user = userCredential.user;
+    final User currentUser = FirebaseAuth.instance.currentUser;
     assert(user.uid == currentUser.uid);
     if (user != null) {
       return true;
@@ -68,22 +69,18 @@ Future<bool> signInWithPhoneNumber(
   }
 }
 
-Future<String> getUid() async {
-  return await FirebaseAuth.instance.currentUser().then((user) {
-    return user.uid;
-  });
+String getUid() {
+  return FirebaseAuth.instance.currentUser.uid;
 }
 
 Future<bool> isUserPresent() async {
-  DocumentSnapshot documentSnapshot = await Firestore.instance
-      .collection('users')
-      .document(await getUid())
-      .get();
+  DocumentSnapshot documentSnapshot =
+      await FirebaseFirestore.instance.collection('users').doc(getUid()).get();
   return documentSnapshot.exists;
 }
 
-void registerUser(User user) {
-  Firestore.instance.collection('users').document(user.uid).setData({
+void registerUser(MyUser user) {
+  FirebaseFirestore.instance.collection('users').doc(user.uid).set({
     'name': user.name,
     'phone': user.phoneNumber,
     'email': user.email,
@@ -94,7 +91,7 @@ void registerUser(User user) {
 }
 
 void deleteUser(BuildContext context) async {
-  Firestore.instance.collection('user').document(await getUid()).delete();
+  FirebaseFirestore.instance.collection('user').doc(getUid()).delete();
   FirebaseAuth.instance.signOut();
   Navigator.pushReplacement(
     context,
@@ -106,56 +103,53 @@ void deleteUser(BuildContext context) async {
   );
 }
 
-Future<User> getUserDetails() async {
-  DocumentSnapshot documentSnapshot = await Firestore.instance
-      .collection('users')
-      .document(await getUid())
-      .get();
+Future<MyUser> getUserDetails() async {
+  DocumentSnapshot documentSnapshot =
+      await FirebaseFirestore.instance.collection('users').doc(getUid()).get();
   DocumentSnapshot doc = await documentSnapshot.reference
       .collection('branches')
-      .document('master')
+      .doc('master')
       .get();
   int addAmount = await getAddAmount();
-  User user = User(
-    documentSnapshot.data['name'],
-    documentSnapshot.data['uid'],
-    documentSnapshot.data['phone'],
-    documentSnapshot.data['email'],
+  MyUser user = MyUser(
+    documentSnapshot.data()["name"],
+    documentSnapshot.data()['uid'],
+    documentSnapshot.data()['phone'],
+    documentSnapshot.data()['email'],
     (await getBranches()).length,
-    doc.data['balance'],
+    doc.data()['balance'],
     addAmount,
   );
   return user;
 }
 
 Future<List<DocumentSnapshot>> getBranches() async {
-  QuerySnapshot querySnapshot = await Firestore.instance
+  QuerySnapshot querySnapshot = await FirebaseFirestore.instance
       .collection('users')
-      .document(await getUid())
+      .doc(getUid())
       .collection('branches')
-      .getDocuments();
-  return querySnapshot.documents;
+      .get();
+  return querySnapshot.docs;
 }
 
 Future<int> getBranchBalance(String branch) async {
-  DocumentSnapshot documentSnapshot = await Firestore.instance
+  DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
       .collection('users')
-      .document(await getUid())
+      .doc(getUid())
       .collection('branches')
-      .document(branch)
+      .doc(branch)
       .get();
-  return documentSnapshot.data['balance'];
+  return documentSnapshot.data()['balance'];
 }
 
 Future<int> getAddAmount() async {
-  int maxAmount = 0,
-      addAmount = 0;
+  int maxAmount = 0, addAmount = 0;
   List<DocumentSnapshot> documents = await getBranches();
   for (int i = 0; i < documents.length; i++) {
-    if (documents[i].documentID == 'master') {
-      maxAmount = documents[i].data['balance'];
+    if (documents[i].id == 'master') {
+      maxAmount = documents[i].data()['balance'];
     } else {
-      addAmount += documents[i].data['balance'];
+      addAmount += documents[i].data()['balance'];
     }
   }
   return maxAmount - addAmount;
@@ -168,10 +162,10 @@ Future<Map<String, double>> getBalanceMap() async {
   });
   List<DocumentSnapshot> documentList = await getBranches();
   for (int i = 0; i < documentList.length; i++) {
-    if (documentList[i].documentID != 'master') {
+    if (documentList[i].id != 'master') {
       dataMap.putIfAbsent(
-        documentList[i].documentID,
-            () => double.parse(documentList[i].data['balance'].toString()),
+        documentList[i].id,
+        () => double.parse(documentList[i].data()['balance'].toString()),
       );
     }
   }
@@ -179,16 +173,14 @@ Future<Map<String, double>> getBalanceMap() async {
 }
 
 void createBranch(String name, String description) async {
-  Firestore.instance
+  FirebaseFirestore.instance
       .collection('users')
-      .document(await getUid())
+      .doc(getUid())
       .collection('branches')
-      .document(name)
-      .setData({
+      .doc(name)
+      .set({
     'balance': 0,
-    'time': DateTime
-        .now()
-        .millisecondsSinceEpoch,
+    'time': DateTime.now().millisecondsSinceEpoch,
     'transactions': 0,
     'desc': description,
   });
@@ -196,74 +188,74 @@ void createBranch(String name, String description) async {
 }
 
 void deleteBranch(String name) async {
-  Firestore.instance
+  FirebaseFirestore.instance
       .collection('users')
-      .document(await getUid())
+      .doc(getUid())
       .collection('branches')
-      .document(name)
+      .doc(name)
       .delete();
   updateBranchCount();
 }
 
 void updateBranchCount() async {
-  Firestore.instance.collection('users').document(await getUid()).updateData({
+  FirebaseFirestore.instance.collection('users').doc(await getUid()).update({
     'branches': (await getBranches()).length,
   });
 }
 
-Future<List<DocumentSnapshot>> getTransactionList(String branch,
-    int type) async {
+Future<List<DocumentSnapshot>> getTransactionList(
+    String branch, int type) async {
   QuerySnapshot querySnapshot = type != 0
-      ? await Firestore.instance
-      .collection('users')
-      .document(await getUid())
-      .collection('branches')
-      .document(branch)
-      .collection('transactions')
-      .where('type', isEqualTo: type)
-      .orderBy('time', descending: true)
-      .getDocuments()
-      : await Firestore.instance
-      .collection('users')
-      .document(await getUid())
-      .collection('branches')
-      .document(branch)
-      .collection('transactions')
-      .orderBy('time', descending: true)
-      .getDocuments();
-  return querySnapshot.documents;
+      ? await FirebaseFirestore.instance
+          .collection('users')
+          .doc(getUid())
+          .collection('branches')
+          .doc(branch)
+          .collection('transactions')
+          .where('type', isEqualTo: type)
+          .orderBy('time', descending: true)
+          .get()
+      : await FirebaseFirestore.instance
+          .collection('users')
+          .doc(getUid())
+          .collection('branches')
+          .doc(branch)
+          .collection('transactions')
+          .orderBy('time', descending: true)
+          .get();
+  return querySnapshot.docs;
 }
 
 void addMoney(String branch, int amount, String desc) async {
-  DocumentSnapshot documentSnapshot = await Firestore.instance
+  DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
       .collection('users')
-      .document(await getUid())
+      .doc(getUid())
       .collection('branches')
-      .document(branch)
+      .doc(branch)
       .get();
-  var balance = documentSnapshot.data['balance'];
-  documentSnapshot.reference.updateData({
+  var balance = documentSnapshot.data()['balance'];
+  documentSnapshot.reference.update({
     'balance': balance + amount,
   });
   makeTransaction(branch, amount, 1, desc);
 }
 
 void debitMoney(String branch, int amount, String desc) async {
-  DocumentSnapshot documentSnapshot = await Firestore.instance
+  DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
       .collection('users')
-      .document(await getUid())
+      .doc(getUid())
       .collection('branches')
-      .document(branch)
+      .doc(branch)
       .get();
-  var balance = documentSnapshot.data['balance'];
-  documentSnapshot.reference.updateData({
+  var balance = documentSnapshot.data()['balance'];
+  documentSnapshot.reference.update({
     'balance': balance - amount,
   });
   makeTransaction(branch, amount, 2, desc);
 }
 
-void makeUpiPayment(String amount, String phone, String app, String desc,
-    String branch) async {
+void makeUpiPayment(
+    String amount, String phone, String app, String desc, String branch) async {
   String response = await FlutterUpi.initiateTransaction(
     app: app,
     pa: "$phone@upi",
@@ -284,20 +276,15 @@ void makeUpiPayment(String amount, String phone, String app, String desc,
 
 void makeTransaction(String branch, int amount, int type, String desc) async {
   int balance = await getBranchBalance(branch);
-  Firestore.instance
+  FirebaseFirestore.instance
       .collection('users')
-      .document(await getUid())
+      .doc(getUid())
       .collection('branches')
-      .document(branch)
+      .doc(branch)
       .collection('transactions')
-      .document(DateTime
-      .now()
-      .millisecondsSinceEpoch
-      .toString())
-      .setData({
-    'time': DateTime
-        .now()
-        .millisecondsSinceEpoch,
+      .doc(DateTime.now().millisecondsSinceEpoch.toString())
+      .set({
+    'time': DateTime.now().millisecondsSinceEpoch,
     'amount': amount,
     'type': type,
     'desc': desc,

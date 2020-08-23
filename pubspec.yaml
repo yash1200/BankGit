@@ -23,19 +23,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^0.13.4
-  cloud_firestore_web:
-  firebase_auth_web:
-  firebase_auth:
-  firebase_core:
-  firebase_core_web:
-  flutter_spinkit:
-  font_awesome_flutter:
-  intl:
-  flutter_upi:
-  provider:
-  flutter_launcher_icons:
-  pie_chart:
+  cloud_firestore: ^0.14.0+2
+  firebase_auth: ^0.18.0+1
+  firebase_core: ^0.5.0
+  flutter_spinkit: ^4.1.2+1
+  font_awesome_flutter: ^8.8.1
+  intl: ^0.16.1
+  flutter_upi: ^0.0.1
+  provider: ^4.3.2+1
+  flutter_launcher_icons: ^0.7.5
+  pie_chart: ^3.1.1
 
 
   # The following adds the Cupertino Icons font to your application.

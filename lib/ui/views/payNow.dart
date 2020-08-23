@@ -113,7 +113,7 @@ class _payNowState extends State<payNow> {
                     if (value.isEmpty) {
                       return 'Amount can\'t be empty';
                     } else if (double.parse(value) >
-                        widget.snapshot.data['balance']) {
+                        widget.snapshot.data()['balance']) {
                       return 'Amount is large';
                     }
                     return null;

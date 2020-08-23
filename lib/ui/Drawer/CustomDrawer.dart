@@ -18,7 +18,7 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
-  User user;
+  MyUser user;
 
   _signOut(BuildContext context) {
     FirebaseAuth.instance.signOut();

@@ -1,4 +1,4 @@
-class User {
+class MyUser {
   String _name;
   String _uid;
   String _phoneNumber;
@@ -7,7 +7,7 @@ class User {
   int _balance;
   int _addAmount;
 
-  User(this._name, this._uid, this._phoneNumber, this._email, this._branches,
+  MyUser(this._name, this._uid, this._phoneNumber, this._email, this._branches,
       this._balance, this._addAmount);
 
   String get email => _email;

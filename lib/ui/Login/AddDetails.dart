@@ -3,6 +3,7 @@ import 'package:bank_management/model/user.dart';
 import 'package:bank_management/ui/Widgets/CustomPaint.dart';
 import 'package:flutter/material.dart';
 
+import '../../FirebaseFunctions/FirebaseFun.dart';
 import '../views/HomePage.dart';
 import 'loginWidget.dart';
 
@@ -26,7 +27,7 @@ class _AddDetailsState extends State<AddDetails> {
   TextEditingController emailController = TextEditingController();
 
   register(BuildContext context) {
-    User user = User(
+    MyUser user = MyUser(
       nameController.text,
       uid,
       widget.phoneNumber,
@@ -50,11 +51,7 @@ class _AddDetailsState extends State<AddDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getUid().then((Uid) {
-      setState(() {
-        uid = Uid;
-      });
-    });
+    uid = getUid();
   }
 
   @override

@@ -3,9 +3,12 @@ import 'package:bank_management/ui/views/HomePage.dart';
 import 'package:bank_management/ui/Login/Login.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'provider/LoginProvider.dart';
+import 'ui/Login/Login.dart';
+import 'ui/views/HomePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,12 +31,16 @@ class MyApp extends StatelessWidget {
           primaryColor: darkColor,
         ),
         home: FutureBuilder(
-          future: FirebaseAuth.instance.currentUser(),
+          future: Firebase.initializeApp(),
           builder: (context, snapshot) {
-            if (snapshot.data != null) {
-              return HomePage();
+            if (snapshot.connectionState == ConnectionState.done) {
+              return FirebaseAuth.instance.currentUser == null
+                  ? Login()
+                  : HomePage();
             } else {
-              return Login();
+              return Center(
+                child: Text("Connect to the Internet!"),
+              );
             }
           },
         ),
