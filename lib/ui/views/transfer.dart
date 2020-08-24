@@ -39,12 +39,19 @@ class _transferState extends State<transfer> {
     );
   }
 
+  void _showSnackBarLocal(String text) {
+    _scaffoldKey.currentState.showSnackBar(
+      SnackBar(
+        content: Text(text),
+        duration: _duration,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppProvider>(context);
-    var size = MediaQuery
-        .of(context)
-        .size;
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       key: _scaffoldKey,
@@ -66,6 +73,18 @@ class _transferState extends State<transfer> {
             color: darkColor,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.replay_outlined,
+              color: darkColor,
+            ),
+            onPressed: () {
+              provider.setTransactionTo("Not Selected");
+              provider.setTransactionFrom("Not Selected");
+            },
+          ),
+        ],
       ),
       body: Form(
         key: _fkey,
@@ -173,6 +192,9 @@ class _transferState extends State<transfer> {
                 }
                 return null;
               },
+              onTap: () {
+                _fkey.currentState.reset();
+              },
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Amount*',
@@ -214,27 +236,13 @@ class _transferState extends State<transfer> {
                 } else {
                   if (provider.transactionTo == provider.transactionFrom &&
                       provider.transactionTo != 'Not Selected') {
-                    _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(
-                        content:
-                        Text('Transaction from and to fields are same'),
-                        duration: _duration,
-                      ),
-                    );
+                    _showSnackBarLocal(
+                        "Transaction from and to fields are same");
                   } else if (provider.transactionTo == 'Not Selected') {
-                    _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(
-                        content: Text('Transaction to field is not selected'),
-                        duration: _duration,
-                      ),
-                    );
+                    _showSnackBarLocal("Transaction to field is not selected");
                   } else if (provider.transactionFrom == 'Not Selected') {
-                    _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(
-                        content: Text('Transaction from field is not selected'),
-                        duration: _duration,
-                      ),
-                    );
+                    _showSnackBarLocal(
+                        "Transaction from field is not selected");
                   }
                 }
               },
