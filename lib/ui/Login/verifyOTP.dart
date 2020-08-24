@@ -9,7 +9,7 @@ import '../views/HomePage.dart';
 import 'AddDetails.dart';
 
 class VerifyOtp extends StatefulWidget {
-  String phoneNumber;
+  final String phoneNumber;
 
   VerifyOtp(this.phoneNumber);
 
@@ -22,16 +22,15 @@ class _VerifyOtpState extends State<VerifyOtp> {
   TextEditingController otpController = TextEditingController();
   bool isLoading = false;
 
-  enterOTP(BuildContext context) {
-    final provider = Provider.of<LoginProvider>(context,listen: false);
-    print("Verification: "+provider.getVerificationId);
+  void enterOTP(BuildContext context) {
+    final provider = Provider.of<LoginProvider>(context, listen: false);
     setState(() {
       isLoading = true;
     });
+    print("Validating OTP");
     signInWithPhoneNumber(
       otpController.text,
       provider.getVerificationId,
-      context,
     ).then((value) {
       if (value) {
         isUserPresent().then((value1) {
@@ -90,7 +89,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                       },
                     ),
                     onTap: () {
-                      if(fkey.currentState.validate()){
+                      if (fkey.currentState.validate()) {
                         print("Verifying OTP");
                         enterOTP(context);
                       }

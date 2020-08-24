@@ -45,7 +45,7 @@ class _branchDetailsState extends State<branchDetails>
       ),
     );
     getAddAmount().then((value) {
-      if (widget.snapshot.id == 'master') {
+      if (widget.snapshot.id == 'Master') {
         showDialog(
           context: context,
           barrierDismissible: true,

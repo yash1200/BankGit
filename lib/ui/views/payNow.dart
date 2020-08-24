@@ -31,7 +31,7 @@ class _payNowState extends State<payNow> {
           amount: amountController.text,
           phone: phoneController.text,
           description: descriptionController.text,
-          branch: widget.snapshot.documentID,
+          branch: widget.snapshot.id,
         );
       },
     );

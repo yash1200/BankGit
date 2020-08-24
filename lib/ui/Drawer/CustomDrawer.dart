@@ -1,6 +1,7 @@
 import 'package:bank_management/model/user.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Login/Login.dart';
+import 'package:bank_management/ui/Widgets/customLogOutDialog.dart';
 import 'package:bank_management/ui/views/CreateBranch.dart';
 import 'package:bank_management/ui/views/UserProfile.dart';
 import 'package:bank_management/ui/views/help.dart';
@@ -20,15 +21,11 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> {
   MyUser user;
 
-  _signOut(BuildContext context) {
-    FirebaseAuth.instance.signOut();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return Login();
-        },
-      ),
+  _showSignOutDialog(BuildContext context) {
+    Navigator.pop(context);
+    showDialog(
+      context: context,
+      child: LogOutDialog(),
     );
   }
 
@@ -167,7 +164,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               width: size.height / 22,
             ),
             onTap: () {
-              _signOut(context);
+              _showSignOutDialog(context);
             },
           ),
         ],

@@ -14,63 +14,63 @@ class AppProvider with ChangeNotifier {
 
   MyUser get getUser => _user;
 
-  setUser(MyUser value) {
+  void setUser(MyUser value) {
     _user = value;
     notifyListeners();
   }
 
   int get transactionIndex => _transactionIndex;
 
-  setTransactionIndex(int value) {
+  void setTransactionIndex(int value) {
     _transactionIndex = value;
     notifyListeners();
   }
 
   get upiType => _upiType;
 
-  setUpiType(value) {
+  void setUpiType(value) {
     _upiType = value;
     notifyListeners();
   }
 
   get transactionTo => _transactionTo;
 
-  setTransactionTo(value) {
+  void setTransactionTo(value) {
     _transactionTo = value;
     notifyListeners();
   }
 
   String get transactionFrom => _transactionFrom;
 
-  setTransactionFrom(String value) {
+  void setTransactionFrom(String value) {
     _transactionFrom = value;
     notifyListeners();
   }
 
   get transactionToIndex => _transactionToIndex;
 
-  setTransactionToIndex(value) {
+  void setTransactionToIndex(value) {
     _transactionToIndex = value;
     notifyListeners();
   }
 
   int get transactionFromIndex => _transactionFromIndex;
 
-  setTransactionFromIndex(int value) {
+  void setTransactionFromIndex(int value) {
     _transactionFromIndex = value;
     notifyListeners();
   }
 
   get transactionFromBalance => _transactionFromBalance;
 
-  setTransactionFromBalance(value) {
+  void setTransactionFromBalance(value) {
     _transactionFromBalance = value;
     notifyListeners();
   }
 
   int get paymentMode => _paymentMode;
 
-  setPaymentMode(int value) {
+  void setPaymentMode(int value) {
     _paymentMode = value;
     notifyListeners();
   }

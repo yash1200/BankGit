@@ -1,8 +1,6 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
-import 'package:bank_management/provider/AppProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_upi/flutter_upi.dart';
-import 'package:provider/provider.dart';
 
 class paymentSheet extends StatefulWidget {
   String amount, phone, description, branch;
@@ -30,7 +28,6 @@ class _paymentSheetState extends State<paymentSheet> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final provider = Provider.of<AppProvider>(context);
     return ListView(
       shrinkWrap: true,
       children: <Widget>[

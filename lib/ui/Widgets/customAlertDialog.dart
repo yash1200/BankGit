@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class customAlertDialogMaster extends StatefulWidget {
-  String branch;
-  int money;
+  final String branch;
+  final int money;
 
   customAlertDialogMaster({this.branch, this.money});
 
@@ -21,7 +21,7 @@ class _customAlertDialogMasterState extends State<customAlertDialogMaster> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AppProvider>(context);
+    final provider = Provider.of<AppProvider>(context,listen: false);
     return AlertDialog(
       elevation: 0.5,
       shape: RoundedRectangleBorder(
@@ -76,7 +76,7 @@ class _customAlertDialogMasterState extends State<customAlertDialogMaster> {
                       'Credit',
                       style: TextStyle(
                         color:
-                        provider.paymentMode == 1 ? darkColor : Colors.blue,
+                            provider.paymentMode == 1 ? darkColor : Colors.blue,
                       ),
                     ),
                     padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
@@ -84,7 +84,7 @@ class _customAlertDialogMasterState extends State<customAlertDialogMaster> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color:
-                        provider.paymentMode == 1 ? darkColor : Colors.blue,
+                            provider.paymentMode == 1 ? darkColor : Colors.blue,
                         width: 1,
                       ),
                       color: Colors.white,
@@ -104,14 +104,14 @@ class _customAlertDialogMasterState extends State<customAlertDialogMaster> {
                       'Debit',
                       style: TextStyle(
                         color:
-                        provider.paymentMode == 0 ? darkColor : Colors.blue,
+                            provider.paymentMode == 0 ? darkColor : Colors.blue,
                       ),
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color:
-                        provider.paymentMode == 0 ? darkColor : Colors.blue,
+                            provider.paymentMode == 0 ? darkColor : Colors.blue,
                         width: 1,
                       ),
                       color: Colors.white,
@@ -122,6 +122,7 @@ class _customAlertDialogMasterState extends State<customAlertDialogMaster> {
             ),
             FlatButton(
               onPressed: () {
+                print(provider.paymentMode);
                 if (_fkey.currentState.validate()) {
                   addMoney(
                     widget.branch,

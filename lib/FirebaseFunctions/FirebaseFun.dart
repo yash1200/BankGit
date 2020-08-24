@@ -12,7 +12,6 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
   final provider = Provider.of<LoginProvider>(context, listen: false);
   var _auth = FirebaseAuth.instance;
   var _verificationId;
-  print(phone);
   final PhoneVerificationCompleted verificationCompleted =
       (PhoneAuthCredential phoneAuthCredential) {
     //_auth.signInWithCredential(phoneAuthCredential);
@@ -35,26 +34,26 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
   };
 
   print('Sending..');
-  print('ver:$_verificationId');
+  print('VerificationId : $_verificationId');
   await _auth.verifyPhoneNumber(
-      phoneNumber: "+91" + phone,
-      timeout: const Duration(seconds: 5),
-      verificationCompleted: verificationCompleted,
-      verificationFailed: verificationFailed,
-      codeSent: codeSent,
-      codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+    phoneNumber: "+91" + phone,
+    timeout: const Duration(seconds: 5),
+    verificationCompleted: verificationCompleted,
+    verificationFailed: verificationFailed,
+    codeSent: codeSent,
+    codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+  );
 }
 
-Future<bool> signInWithPhoneNumber(
-    String otp, String verificationId, BuildContext context) async {
+Future<bool> signInWithPhoneNumber(String otp, String verificationId) async {
   try {
     final AuthCredential credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: otp,
     );
-    UserCredential userCredential =
+    final UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
-    User user = userCredential.user;
+    final User user = userCredential.user;
     final User currentUser = FirebaseAuth.instance.currentUser;
     assert(user.uid == currentUser.uid);
     if (user != null) {
@@ -86,6 +85,7 @@ void registerUser(MyUser user) {
     'email': user.email,
     'uid': user.uid,
     'branches': 1,
+    'balance': user.balance,
   });
   createBranch('Master', 'Master Branch');
 }
@@ -117,7 +117,7 @@ Future<MyUser> getUserDetails() async {
     documentSnapshot.data()['phone'],
     documentSnapshot.data()['email'],
     (await getBranches()).length,
-    doc.data()['balance'],
+    documentSnapshot.data()['balance'],
     addAmount,
   );
   return user;
@@ -271,6 +271,7 @@ void makeUpiPayment(
   print("Status: ${flutterUpiResponse.Status}");
   if (flutterUpiResponse.Status == 'SUCCESS') {
     debitMoney(branch, int.parse(amount), desc);
+    debitMoney("Master", int.parse(amount), "From branch $branch");
   }
 }
 
