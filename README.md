@@ -21,4 +21,16 @@ You can also make payments from the application via UPI. Supported UPI apps are 
 
 ## Login UI
 
-<img src="https://imgur.com/JSVfOF5.png" height="500"> <img src="https://imgur.com/FtHaDRb.png" height="500">
+<img src="https://imgur.com/JSVfOF5.png" height="500"> <img src="https://imgur.com/FtHaDRb.png" height="500"> <img src="https://imgur.com/JjuXJDq.png" height="500">
+
+## User Profile
+
+<img src="https://imgur.com/4ICXUM0.png" height="500">
+
+## All branches and Creating a branch
+
+<img src ="https://imgur.com/6Zm06u1.png" height="500"> <img src="https://imgur.com/3yyZvcQ.png" height="500">
+
+## Money transfer between branches
+
+<img src="https://imgur.com/XfmhUue.png" height="500">
