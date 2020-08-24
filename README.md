@@ -1,16 +1,20 @@
-# bank_management
+# Bank Git
 
-A new Flutter application.
+Bank Git is an application built with Flutter and Firebase to help you manage your bank account in a more efficient way.
 
-## Getting Started
+Bank Git breaks your bank account into multiple branches, which you will define according to your preferencess and the total money in your account will be managed under `master` branch.
 
-This project is a starting point for a Flutter application.
+It is just like `git`, just modified to work efficiently for your bank account.
 
-A few resources to get you started if this is your first Flutter project:
+Operations suppported on a branch :
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+1. Transfer money from one branch to another branch.
+2. Make payments from a specific branch(Changes will reflect only in current branch and `master` branch).
+3. All the transactions will be shown in current branch details with transaction money and money in that branch during that specific transaction.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+You can also make payments from the application via UPI. Supported UPI apps are : 
+
+1. BHIM UPI
+2. PayTm
+3. Google Pay
+4. Amazon Pay
