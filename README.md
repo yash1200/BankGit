@@ -18,3 +18,7 @@ You can also make payments from the application via UPI. Supported UPI apps are 
 2. PayTm
 3. Google Pay
 4. Amazon Pay
+
+## Login UI
+
+<img src="https://imgur.com/JSVfOF5.png" height="500"> <img src="https://imgur.com/FtHaDRb.png" height="500">
