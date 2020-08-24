@@ -81,7 +81,9 @@ class _transferState extends State<transfer> {
             ),
             onPressed: () {
               provider.setTransactionTo("Not Selected");
+              provider.setTransactionToIndex(0);
               provider.setTransactionFrom("Not Selected");
+              provider.setTransactionFromIndex(0);
             },
           ),
         ],
