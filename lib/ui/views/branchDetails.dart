@@ -45,13 +45,13 @@ class _branchDetailsState extends State<branchDetails>
       ),
     );
     getAddAmount().then((value) {
-      if (widget.snapshot.documentID == 'master') {
+      if (widget.snapshot.id == 'master') {
         showDialog(
           context: context,
           barrierDismissible: true,
           builder: (context) {
             return customAlertDialogMaster(
-              branch: widget.snapshot.documentID,
+              branch: widget.snapshot.id,
               money: value,
             );
           },
@@ -62,7 +62,7 @@ class _branchDetailsState extends State<branchDetails>
           barrierDismissible: true,
           builder: (context) {
             return customAlertDialogBranch(
-              branch: widget.snapshot.documentID,
+              branch: widget.snapshot.id,
               money: value,
             );
           },
@@ -97,7 +97,7 @@ class _branchDetailsState extends State<branchDetails>
           },
         ),
         title: Text(
-          widget.snapshot.documentID,
+          widget.snapshot.id,
           style: TextStyle(
             color: darkColor,
           ),
@@ -112,7 +112,7 @@ class _branchDetailsState extends State<branchDetails>
             onSelected: (value) {
               switch (value) {
                 case 'Delete Branch':
-                  deleteBranch(widget.snapshot.documentID);
+                  deleteBranch(widget.snapshot.id);
                   Navigator.pop(context);
                   break;
                 default:
@@ -141,7 +141,7 @@ class _branchDetailsState extends State<branchDetails>
             height: size.height / 40,
           ),
           Hero(
-            tag: widget.snapshot.documentID,
+            tag: widget.snapshot.id,
             child: Container(
               height: size.height / 5,
               padding: EdgeInsets.all(10),
@@ -164,7 +164,7 @@ class _branchDetailsState extends State<branchDetails>
                         width: 5,
                       ),
                       FutureBuilder(
-                        future: getBranchBalance(widget.snapshot.documentID),
+                        future: getBranchBalance(widget.snapshot.id),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Text(
@@ -265,7 +265,7 @@ class _branchDetailsState extends State<branchDetails>
             height: size.height / 80,
           ),
           transactionPage(
-            widget.snapshot.documentID,
+            widget.snapshot.id,
             provider.transactionIndex,
           ),
         ],

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Bank Management',
+        title: 'Bank Git',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: darkColor,

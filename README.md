@@ -1,6 +1,6 @@
 # bank_management
 
-A new Flutter project.
+A new Flutter application.
 
 ## Getting Started
 

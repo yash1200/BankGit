@@ -1,8 +1,8 @@
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/provider/AppProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_upi/flutter_upi.dart';
 import 'package:provider/provider.dart';
-import 'package:upi_pay/upi_pay.dart';
 
 class paymentSheet extends StatefulWidget {
   String amount, phone, description, branch;
@@ -21,10 +21,10 @@ class _paymentSheetState extends State<paymentSheet> {
     'assets/amazon-pay.png',
   ];
   var upiVendor = [
-    UpiApplication.bhim,
-    UpiApplication.payTM,
-    UpiApplication.googlePay,
-    UpiApplication.amazonPay,
+    FlutterUpiApps.BHIMUPI,
+    FlutterUpiApps.PayTM,
+    FlutterUpiApps.GooglePay,
+    FlutterUpiApps.AmazonPay,
   ];
 
   @override

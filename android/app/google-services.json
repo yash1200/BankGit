@@ -15,27 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "98256588908-53qabgq57b5h271dpgj793kuhk1dv35n.apps.googleusercontent.com",
+          "client_id": "98256588908-ekqa484dfeucspmll9acokba9t8bv7vo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.bank_management",
-            "certificate_hash": "aee2a00072dbd078af4d38f68c425dee4d919fcc"
-          }
-        },
-        {
-          "client_id": "98256588908-gf2cftlqj3hvbh7f7q9pv9dehgueijbb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.bank_management",
-            "certificate_hash": "806846c6d901c08affd2a41d6a914c2bbf95cf71"
-          }
-        },
-        {
-          "client_id": "98256588908-cbuh63mi3lapcuqhakr2elfke56qogno.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.bank_management",
-            "certificate_hash": "2c952ef2797c4b9bd06d0ff5fa2dd08bb111c532"
+            "certificate_hash": "d78366728dd3f134b22d9736da4c778f0a2f521b"
           }
         },
         {

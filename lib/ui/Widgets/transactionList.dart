@@ -31,16 +31,16 @@ class _transactionPageState extends State<transactionPage> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                    snapshot.data[index]['desc'],
+                    snapshot.data[index].data()['desc'],
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 18,
                     ),
                   ),
                   subtitle: Text(
-                    'Balance: ${snapshot.data[index]['balance'].toString()}'
-                        '(${snapshot.data[index]['type'] == 1 ? '+' : '-'}'
-                        '${snapshot.data[index]['amount'].toString()})',
+                    'Balance: ${snapshot.data[index].data()['balance'].toString()}'
+                        '(${snapshot.data[index].data()['type'] == 1 ? '+' : '-'}'
+                        '${snapshot.data[index].data()['amount'].toString()})',
                     style: TextStyle(
                       fontWeight: FontWeight.w300,
                     ),
@@ -50,10 +50,10 @@ class _transactionPageState extends State<transactionPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        snapshot.data[index]['amount'].toString(),
+                        snapshot.data[index].data()['amount'].toString(),
                         style: TextStyle(
                           fontSize: 18,
-                          color: snapshot.data[index]['type'] == 1
+                          color: snapshot.data[index].data()['type'] == 1
                               ? Colors.green
                               : Colors.redAccent,
                         ),
@@ -61,7 +61,7 @@ class _transactionPageState extends State<transactionPage> {
                       Text(
                         DateFormat.MMMd()
                             .format(DateTime.fromMillisecondsSinceEpoch(
-                            snapshot.data[index]['time']))
+                            snapshot.data[index].data()['time']))
                             .toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.w300,
