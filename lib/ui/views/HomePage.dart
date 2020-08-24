@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Map<String, double> dataMap = Map();
   var textStyle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w400,
@@ -20,25 +19,9 @@ class _HomePageState extends State<HomePage> {
   );
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setMap();
-  }
-
-  @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     setUser(context);
-  }
-
-  void setMap() {
-    getBalanceMap().then((value) {
-      setState(() {
-        dataMap = value;
-      });
-    });
   }
 
   setUser(BuildContext context) async {
@@ -85,7 +68,6 @@ class _HomePageState extends State<HomePage> {
                   future: getBalanceMap(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      print(snapshot.data);
                       return PieChart(
                         dataMap: snapshot.data,
                         legendStyle: TextStyle(

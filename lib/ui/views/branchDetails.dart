@@ -13,8 +13,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class branchDetails extends StatefulWidget {
-  DocumentSnapshot snapshot;
-  Gradient gradientContainer;
+  final DocumentSnapshot snapshot;
+  final Gradient gradientContainer;
 
   branchDetails({this.snapshot, this.gradientContainer});
 

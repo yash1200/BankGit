@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomImage extends StatelessWidget {
-  String path;
+  final String path;
 
   CustomImage(this.path);
 

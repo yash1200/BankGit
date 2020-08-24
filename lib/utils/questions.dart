@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 List<String> question = [_question1, _question2, _question3, _question4];
 List<String> answer = [_answer1, _answer2, _answer3, _answer4];
 var _question1 = 'How to use the app ?';

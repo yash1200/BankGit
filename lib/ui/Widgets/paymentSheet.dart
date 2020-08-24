@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_upi/flutter_upi.dart';
 
 class paymentSheet extends StatefulWidget {
-  String amount, phone, description, branch;
+  final String amount;
+  final String phone;
+  final String description;
+  final String branch;
 
   paymentSheet({this.amount, this.phone, this.description, this.branch});
 

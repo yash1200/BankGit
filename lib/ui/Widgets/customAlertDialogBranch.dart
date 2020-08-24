@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class customAlertDialogBranch extends StatefulWidget {
-  String branch;
-  int money;
+  final String branch;
+  final int money;
 
   customAlertDialogBranch({this.branch, this.money});
 

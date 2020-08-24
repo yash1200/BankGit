@@ -168,10 +168,10 @@ class _UserProfileState extends State<UserProfile> {
                   legendStyle: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    color: darkColor
+                    color: darkColor,
                   ),
                   chartRadius: size.width / 2.3,
-                  colorList: [darkColor],
+                  colorList: [darkColor, darkColor, darkColor],
                 );
               } else {
                 return Center(

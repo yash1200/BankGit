@@ -1,13 +1,11 @@
 import 'package:bank_management/model/user.dart';
 import 'package:bank_management/provider/AppProvider.dart';
-import 'package:bank_management/ui/Login/Login.dart';
 import 'package:bank_management/ui/Widgets/customLogOutDialog.dart';
 import 'package:bank_management/ui/views/CreateBranch.dart';
 import 'package:bank_management/ui/views/UserProfile.dart';
 import 'package:bank_management/ui/views/help.dart';
 import 'package:bank_management/ui/views/transfer.dart';
 import 'package:bank_management/utils/Style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

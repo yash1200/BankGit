@@ -8,7 +8,7 @@ import '../views/HomePage.dart';
 import 'loginWidget.dart';
 
 class AddDetails extends StatefulWidget {
-  String phoneNumber;
+  final String phoneNumber;
 
   AddDetails(this.phoneNumber);
 

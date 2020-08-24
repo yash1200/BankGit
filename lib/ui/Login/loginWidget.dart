@@ -2,18 +2,18 @@ import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatefulWidget {
-  Widget textField;
-  String title;
-  String subtitle;
-  VoidCallback onTap;
-  bool isLoading = false;
+  final Widget textField;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+  final bool isLoading;
 
   LoginWidget({
     this.textField,
     this.title,
     this.subtitle,
     this.onTap,
-    this.isLoading,
+    this.isLoading = false,
   });
 
   @override

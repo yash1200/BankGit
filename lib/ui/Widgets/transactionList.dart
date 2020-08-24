@@ -3,8 +3,8 @@ import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:intl/intl.dart';
 
 class transactionPage extends StatefulWidget {
-  String branch;
-  int type;
+  final String branch;
+  final int type;
 
   transactionPage(this.branch, this.type);
 

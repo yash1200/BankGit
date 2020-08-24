@@ -1,14 +1,11 @@
-import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
-import 'package:bank_management/provider/AppProvider.dart';
 import 'package:bank_management/ui/Widgets/imageWidget.dart';
 import 'package:bank_management/ui/Widgets/paymentSheet.dart';
 import 'package:bank_management/utils/Style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class payNow extends StatefulWidget {
-  DocumentSnapshot snapshot;
+  final DocumentSnapshot snapshot;
 
   payNow(this.snapshot);
 
