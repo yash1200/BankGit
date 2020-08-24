@@ -4,7 +4,7 @@ class MyUser {
   String _phoneNumber;
   String _email;
   int _branches;
-  int _balance;
+  double _balance;
   int _addAmount;
 
   MyUser(this._name, this._uid, this._phoneNumber, this._email, this._branches,
@@ -34,9 +34,9 @@ class MyUser {
     _name = value;
   }
 
-  int get balance => _balance;
+  double get balance => _balance;
 
-  setBalance(int value) {
+  setBalance(double value) {
     _balance = value;
   }
 

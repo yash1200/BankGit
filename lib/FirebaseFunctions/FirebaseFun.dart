@@ -113,7 +113,7 @@ Future<MyUser> getUserDetails() async {
     documentSnapshot.data()['phone'],
     documentSnapshot.data()['email'],
     (await getBranches()).length,
-    documentSnapshot.data()['balance'],
+    double.parse(documentSnapshot.data()['balance'].toString()),
     addAmount,
   );
   return user;
@@ -194,8 +194,20 @@ void deleteBranch(String name) async {
 }
 
 void updateBranchCount() async {
-  FirebaseFirestore.instance.collection('users').doc(await getUid()).update({
+  FirebaseFirestore.instance.collection('users').doc(getUid()).update({
     'branches': (await getBranches()).length,
+  });
+}
+
+void updateBalanceInUser(String amount) async {
+  FirebaseFirestore.instance
+      .collection("users")
+      .doc(getUid())
+      .get()
+      .then((value) {
+    FirebaseFirestore.instance.collection("users").doc(getUid()).update({
+      "balance": double.parse(value.data()["balance"]) + double.parse(amount),
+    });
   });
 }
 
@@ -268,6 +280,7 @@ void makeUpiPayment(
   if (flutterUpiResponse.Status == 'SUCCESS') {
     debitMoney(branch, int.parse(amount), desc);
     debitMoney("Master", int.parse(amount), "From branch $branch");
+    updateBalanceInUser("-$amount");
   }
 }
 

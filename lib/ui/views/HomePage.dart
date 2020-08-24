@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         chartRadius: size.width / 2.3,
                         initialAngle: 0,
-                        colorList: [darkColor, darkColor, darkColor],
+                        colorList: chartColor,
                       );
                     } else {
                       return Center(

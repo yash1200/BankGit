@@ -21,7 +21,7 @@ class _customAlertDialogMasterState extends State<customAlertDialogMaster> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AppProvider>(context,listen: false);
+    final provider = Provider.of<AppProvider>(context, listen: false);
     return AlertDialog(
       elevation: 0.5,
       shape: RoundedRectangleBorder(
@@ -129,6 +129,7 @@ class _customAlertDialogMasterState extends State<customAlertDialogMaster> {
                     int.parse(amountController.text),
                     'Money Added',
                   );
+                  updateBalanceInUser(amountController.text);
                   Navigator.pop(context);
                 }
               },

@@ -171,7 +171,7 @@ class _UserProfileState extends State<UserProfile> {
                     color: darkColor,
                   ),
                   chartRadius: size.width / 2.3,
-                  colorList: [darkColor, darkColor, darkColor],
+                  colorList: chartColor,
                 );
               } else {
                 return Center(
