@@ -50,6 +50,7 @@ class _customAlertDialogBranchState extends State<customAlertDialogBranch> {
                 ),
               ),
               validator: (value) {
+                print("Mpney "+widget.money.toString());
                 if (value.isEmpty) {
                   return 'Amount can\'t be empty';
                 } else if (int.parse(value) == 0) {
@@ -75,7 +76,7 @@ class _customAlertDialogBranchState extends State<customAlertDialogBranch> {
                       'Credit',
                       style: TextStyle(
                         color:
-                        provider.paymentMode == 1 ? darkColor : Colors.blue,
+                            provider.paymentMode == 1 ? darkColor : Colors.blue,
                       ),
                     ),
                     padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
@@ -83,7 +84,7 @@ class _customAlertDialogBranchState extends State<customAlertDialogBranch> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color:
-                        provider.paymentMode == 1 ? darkColor : Colors.blue,
+                            provider.paymentMode == 1 ? darkColor : Colors.blue,
                         width: 1,
                       ),
                       color: Colors.white,
@@ -103,14 +104,14 @@ class _customAlertDialogBranchState extends State<customAlertDialogBranch> {
                       'Debit',
                       style: TextStyle(
                         color:
-                        provider.paymentMode == 0 ? darkColor : Colors.blue,
+                            provider.paymentMode == 0 ? darkColor : Colors.blue,
                       ),
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color:
-                        provider.paymentMode == 0 ? darkColor : Colors.blue,
+                            provider.paymentMode == 0 ? darkColor : Colors.blue,
                         width: 1,
                       ),
                       color: Colors.white,

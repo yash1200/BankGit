@@ -106,10 +106,6 @@ void deleteUser(BuildContext context) async {
 Future<MyUser> getUserDetails() async {
   DocumentSnapshot documentSnapshot =
       await FirebaseFirestore.instance.collection('users').doc(getUid()).get();
-  DocumentSnapshot doc = await documentSnapshot.reference
-      .collection('branches')
-      .doc('master')
-      .get();
   int addAmount = await getAddAmount();
   MyUser user = MyUser(
     documentSnapshot.data()["name"],
@@ -146,7 +142,7 @@ Future<int> getAddAmount() async {
   int maxAmount = 0, addAmount = 0;
   List<DocumentSnapshot> documents = await getBranches();
   for (int i = 0; i < documents.length; i++) {
-    if (documents[i].id == 'master') {
+    if (documents[i].id == 'Master') {
       maxAmount = documents[i].data()['balance'];
     } else {
       addAmount += documents[i].data()['balance'];
@@ -162,7 +158,7 @@ Future<Map<String, double>> getBalanceMap() async {
   });
   List<DocumentSnapshot> documentList = await getBranches();
   for (int i = 0; i < documentList.length; i++) {
-    if (documentList[i].id != 'master') {
+    if (documentList[i].id != 'Master') {
       dataMap.putIfAbsent(
         documentList[i].id,
         () => double.parse(documentList[i].data()['balance'].toString()),

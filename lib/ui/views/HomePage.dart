@@ -48,9 +48,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery
-        .of(context)
-        .size;
+    var size = MediaQuery.of(context).size;
     return Container(
       color: darkColor,
       child: SafeArea(
@@ -83,29 +81,29 @@ class _HomePageState extends State<HomePage> {
                     style: textStyle,
                   ),
                 ),
-//                FutureBuilder(
-//                  future: getBalanceMap(),
-//                  builder: (context, snapshot) {
-//                    if (snapshot.hasData) {
-//                      print(snapshot.data);
-//                      return PieChart(
-//                        dataMap: snapshot.data,
-//                        legendStyle: TextStyle(
-//                          fontSize: 16,
-//                          fontWeight: FontWeight.w400,
-//                          color: darkColor
-//                        ),
-//                        chartRadius: size.width / 2.3,
-//                        colorList: [darkColor],
-//                      );
-//                    } else {
-//                      return Center(
-//                        child: CircularProgressIndicator(),
-//                      );
-//                    }
-//                  },
-//                ),
-
+                FutureBuilder(
+                  future: getBalanceMap(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      print(snapshot.data);
+                      return PieChart(
+                        dataMap: snapshot.data,
+                        legendStyle: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: darkColor,
+                        ),
+                        chartRadius: size.width / 2.3,
+                        initialAngle: 0,
+                        colorList: [darkColor, darkColor, darkColor],
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
               ],
             ),
           ),
