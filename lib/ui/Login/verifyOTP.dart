@@ -28,7 +28,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
       isLoading = true;
     });
     print("Validating OTP");
-    signInWithPhoneNumber(
+    signIn(
       otpController.text,
       provider.getVerificationId,
     ).then((value) {

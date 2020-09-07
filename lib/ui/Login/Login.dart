@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/ui/Login/verifyOTP.dart';
 import 'package:bank_management/ui/Widgets/CustomPaint.dart';
 import 'package:bank_management/ui/Login/loginWidget.dart';
 import 'package:flutter/material.dart';
+
+import '../../FirebaseFunctions/FirebaseFun.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -51,11 +55,11 @@ class _LoginState extends State<Login> {
                       },
                     ),
                     onTap: () {
-                      if(fkey.currentState.validate()){
+                      if (fkey.currentState.validate()) {
                         setState(() {
                           isLoading = true;
                         });
-                        verifyPhoneNumber(phoneNumberController.text, context);
+                        verifyNumber(phoneNumberController.text, context);
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

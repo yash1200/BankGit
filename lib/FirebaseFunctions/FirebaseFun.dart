@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bank_management/ui/Login/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,20 @@ import 'package:bank_management/provider/LoginProvider.dart';
 
 import '../model/user.dart';
 
-void verifyPhoneNumber(String phone, BuildContext context) async {
+import 'package:flutter/foundation.dart';
+
+ConfirmationResult confirmationResult;
+
+Future<void> verifyNumber(String phone, BuildContext context) async {
+  if (!kIsWeb) {
+    return await verifyPhoneNumber(phone, context);
+  } else {
+    return await verifyPhoneNumberForWeb(phone);
+  }
+}
+
+/// For Android and iOS Users.
+Future<void> verifyPhoneNumber(String phone, BuildContext context) async {
   final provider = Provider.of<LoginProvider>(context, listen: false);
   var _auth = FirebaseAuth.instance;
   var _verificationId;
@@ -45,6 +60,26 @@ void verifyPhoneNumber(String phone, BuildContext context) async {
   );
 }
 
+/// For web users.
+Future<void> verifyPhoneNumberForWeb(String phone) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  confirmationResult = await auth.signInWithPhoneNumber(
+    "+91" + phone,
+    RecaptchaVerifier(
+      container: 'recaptcha',
+    ),
+  );
+}
+
+Future<bool> signIn(String otp, String verificationId) async {
+  if (!kIsWeb) {
+    return await signInWithPhoneNumber(otp, verificationId);
+  } else {
+    return await signInWithPhoneNumberForWeb(otp);
+  }
+}
+
+/// For Android and iOS users.
 Future<bool> signInWithPhoneNumber(String otp, String verificationId) async {
   try {
     final AuthCredential credential = PhoneAuthProvider.credential(
@@ -64,6 +99,17 @@ Future<bool> signInWithPhoneNumber(String otp, String verificationId) async {
   } catch (e) {
     print(e);
     print('Failed');
+    return false;
+  }
+}
+
+/// For web users.
+Future<bool> signInWithPhoneNumberForWeb(String otp) async {
+  UserCredential userCredential = await confirmationResult.confirm(otp);
+  final User user = userCredential.user;
+  if (user != null) {
+    return true;
+  } else {
     return false;
   }
 }
