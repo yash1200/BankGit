@@ -112,16 +112,19 @@ Future<bool> signInWithPhoneNumberForWeb(String otp) async {
   }
 }
 
+/// Gets the firebase uid.
 String getUid() {
   return FirebaseAuth.instance.currentUser.uid;
 }
 
+/// Checks if the user is present in database.
 Future<bool> isUserPresent() async {
   DocumentSnapshot documentSnapshot =
       await FirebaseFirestore.instance.collection('users').doc(getUid()).get();
   return documentSnapshot.exists;
 }
 
+/// Adds the user in database.
 void registerUser(MyUser user) {
   FirebaseFirestore.instance.collection('users').doc(user.uid).set({
     'name': user.name,
@@ -134,6 +137,7 @@ void registerUser(MyUser user) {
   createBranch('Master', 'Master Branch');
 }
 
+/// Deletes the user from database.
 void deleteUser(BuildContext context) async {
   FirebaseFirestore.instance.collection('user').doc(getUid()).delete();
   FirebaseAuth.instance.signOut();
@@ -147,6 +151,7 @@ void deleteUser(BuildContext context) async {
   );
 }
 
+/// Fetches user details from database.
 Future<MyUser> getUserDetails() async {
   DocumentSnapshot documentSnapshot =
       await FirebaseFirestore.instance.collection('users').doc(getUid()).get();
@@ -163,6 +168,7 @@ Future<MyUser> getUserDetails() async {
   return user;
 }
 
+/// Fetches the user branches from database.
 Future<List<DocumentSnapshot>> getBranches() async {
   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
       .collection('users')
@@ -172,6 +178,7 @@ Future<List<DocumentSnapshot>> getBranches() async {
   return querySnapshot.docs;
 }
 
+/// Fetches the balance from a branch.
 Future<int> getBranchBalance(String branch) async {
   DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
       .collection('users')
@@ -182,6 +189,7 @@ Future<int> getBranchBalance(String branch) async {
   return documentSnapshot.data()['balance'];
 }
 
+/// Fetches the amount that can be added in branch.
 Future<int> getAddAmount() async {
   int maxAmount = 0, addAmount = 0;
   List<DocumentSnapshot> documents = await getBranches();
@@ -195,6 +203,7 @@ Future<int> getAddAmount() async {
   return maxAmount - addAmount;
 }
 
+/// Fetches the balance of all branches for chart.
 Future<Map<String, double>> getBalanceMap() async {
   Map<String, double> dataMap = Map();
   getAddAmount().then((value) {
@@ -212,6 +221,7 @@ Future<Map<String, double>> getBalanceMap() async {
   return dataMap;
 }
 
+/// Function to create a branch.
 void createBranch(String name, String description) async {
   FirebaseFirestore.instance
       .collection('users')
@@ -227,6 +237,7 @@ void createBranch(String name, String description) async {
   updateBranchCount();
 }
 
+/// Function to delete a branch.
 void deleteBranch(String name) async {
   FirebaseFirestore.instance
       .collection('users')
@@ -237,12 +248,14 @@ void deleteBranch(String name) async {
   updateBranchCount();
 }
 
+/// Updates branch count in database.
 void updateBranchCount() async {
   FirebaseFirestore.instance.collection('users').doc(getUid()).update({
     'branches': (await getBranches()).length,
   });
 }
 
+/// Updates balance of user in database.
 void updateBalanceInUser(String amount) async {
   FirebaseFirestore.instance
       .collection("users")
@@ -255,6 +268,7 @@ void updateBalanceInUser(String amount) async {
   });
 }
 
+/// Fetches transactions in database.
 Future<List<QueryDocumentSnapshot>> getTransactionList(
     String branch, int type) async {
   QuerySnapshot querySnapshot = type != 0
@@ -278,6 +292,7 @@ Future<List<QueryDocumentSnapshot>> getTransactionList(
   return querySnapshot.docs;
 }
 
+/// Function to add money to database.
 void addMoney(String branch, int amount, String desc) async {
   DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
       .collection('users')
@@ -292,6 +307,7 @@ void addMoney(String branch, int amount, String desc) async {
   makeTransaction(branch, amount, 1, desc);
 }
 
+/// Function to debit money from database.
 void debitMoney(String branch, int amount, String desc) async {
   DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
       .collection('users')
@@ -306,6 +322,7 @@ void debitMoney(String branch, int amount, String desc) async {
   makeTransaction(branch, amount, 2, desc);
 }
 
+/// Function to make UPI payment.
 void makeUpiPayment(
     String amount, String phone, String app, String desc, String branch) async {
   String response = await FlutterUpi.initiateTransaction(
@@ -328,6 +345,7 @@ void makeUpiPayment(
   }
 }
 
+/// Make a transaction in database.
 void makeTransaction(String branch, int amount, int type, String desc) async {
   int balance = await getBranchBalance(branch);
   FirebaseFirestore.instance
