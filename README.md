@@ -8,16 +8,22 @@ It is just like `git`, just modified to work efficiently for your bank account.
 
 Operations suppported on a branch :
 
-1. Transfer money from one branch to another branch.
-2. Make payments from a specific branch(Changes will reflect only in current branch and `master` branch).
-3. All the transactions will be shown in current branch details with transaction money and money in that branch during that specific transaction.
+* Transfer money from one branch to another branch.
+* Make payments from a specific branch(Changes will reflect only in current branch and `master` branch).
+* All the transactions will be shown in current branch details with transaction money and money in that branch during that specific transaction.
 
-You can also make payments from the application via UPI. Supported UPI apps are : 
+You can also make payments from the application via UPI. Supported UPI apps are (Android and iOS) : 
 
-1. BHIM UPI
-2. PayTm
-3. Google Pay
-4. Amazon Pay
+* BHIM UPI
+* PayTm
+* Google Pay
+* Amazon Pay
+
+## Supported Platforms
+
+* Android
+* iOS
+* Web (PWA)
 
 ## Login UI
 
