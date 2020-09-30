@@ -12,7 +12,7 @@ Operations suppported on a branch :
 2. Make payments from a specific branch(Changes will reflect only in current branch and `master` branch).
 3. All the transactions will be shown in current branch details with transaction money and money in that branch during that specific transaction.
 
-You can also make payments from the application via UPI. Supported UPI apps are : 
+You can also make payments from the application via UPI. Supported UPI apps are (Android and iOS) : 
 
 1. BHIM UPI
 2. PayTm
