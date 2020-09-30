@@ -2,19 +2,19 @@ import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_upi/flutter_upi.dart';
 
-class paymentSheet extends StatefulWidget {
+class PaymentSheet extends StatefulWidget {
   final String amount;
   final String phone;
   final String description;
   final String branch;
 
-  paymentSheet({this.amount, this.phone, this.description, this.branch});
+  PaymentSheet({this.amount, this.phone, this.description, this.branch});
 
   @override
-  _paymentSheetState createState() => _paymentSheetState();
+  _PaymentSheetState createState() => _PaymentSheetState();
 }
 
-class _paymentSheetState extends State<paymentSheet> {
+class _PaymentSheetState extends State<PaymentSheet> {
   var imageName = [
     'assets/bhim.png',
     'assets/paytm.png',

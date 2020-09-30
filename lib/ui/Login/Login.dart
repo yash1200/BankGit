@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:bank_management/ui/Login/verifyOTP.dart';
 import 'package:bank_management/ui/Widgets/CustomPaint.dart';
@@ -20,7 +18,6 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

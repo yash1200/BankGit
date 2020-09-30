@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/home/yash/flutter"
-export "FLUTTER_APPLICATION_PATH=/home/yash/Projects/bank_management"
+export "FLUTTER_APPLICATION_PATH=/home/yash/Projects/BankGit"
 export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "SYMROOT=${SOURCE_ROOT}/../build/ios"

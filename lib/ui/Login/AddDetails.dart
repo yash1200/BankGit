@@ -49,7 +49,6 @@ class _AddDetailsState extends State<AddDetails> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     uid = getUid();
   }

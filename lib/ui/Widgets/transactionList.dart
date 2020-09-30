@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:bank_management/FirebaseFunctions/FirebaseFun.dart';
 import 'package:intl/intl.dart';
 
-class transactionPage extends StatefulWidget {
+class TransactionPage extends StatefulWidget {
   final String branch;
   final int type;
 
-  transactionPage(this.branch, this.type);
+  TransactionPage(this.branch, this.type);
 
   @override
-  _transactionPageState createState() => _transactionPageState();
+  _TransactionPageState createState() => _TransactionPageState();
 }
 
-class _transactionPageState extends State<transactionPage> {
+class _TransactionPageState extends State<TransactionPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -39,8 +39,8 @@ class _transactionPageState extends State<transactionPage> {
                   ),
                   subtitle: Text(
                     'Balance: ${snapshot.data[index].data()['balance'].toString()}'
-                        '(${snapshot.data[index].data()['type'] == 1 ? '+' : '-'}'
-                        '${snapshot.data[index].data()['amount'].toString()})',
+                    '(${snapshot.data[index].data()['type'] == 1 ? '+' : '-'}'
+                    '${snapshot.data[index].data()['amount'].toString()})',
                     style: TextStyle(
                       fontWeight: FontWeight.w300,
                     ),
@@ -61,7 +61,7 @@ class _transactionPageState extends State<transactionPage> {
                       Text(
                         DateFormat.MMMd()
                             .format(DateTime.fromMillisecondsSinceEpoch(
-                            snapshot.data[index].data()['time']))
+                                snapshot.data[index].data()['time']))
                             .toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.w300,

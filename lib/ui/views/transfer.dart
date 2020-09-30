@@ -7,12 +7,12 @@ import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class transfer extends StatefulWidget {
+class Transfer extends StatefulWidget {
   @override
-  _transferState createState() => _transferState();
+  _TransferState createState() => _TransferState();
 }
 
-class _transferState extends State<transfer> {
+class _TransferState extends State<Transfer> {
   TextEditingController amountController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   var _fkey = GlobalKey<FormState>();
@@ -24,7 +24,7 @@ class _transferState extends State<transfer> {
       context: context,
       shape: sheetBorder,
       builder: (context) {
-        return transactionFrom();
+        return TransactionFrom();
       },
     );
   }
@@ -34,7 +34,7 @@ class _transferState extends State<transfer> {
       context: context,
       shape: sheetBorder,
       builder: (context) {
-        return transactionTo();
+        return TransactionTo();
       },
     );
   }

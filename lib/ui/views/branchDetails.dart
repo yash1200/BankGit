@@ -12,17 +12,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-class branchDetails extends StatefulWidget {
+class BranchDetails extends StatefulWidget {
   final DocumentSnapshot snapshot;
   final Gradient gradientContainer;
 
-  branchDetails({this.snapshot, this.gradientContainer});
+  BranchDetails({this.snapshot, this.gradientContainer});
 
   @override
-  _branchDetailsState createState() => _branchDetailsState();
+  _BranchDetailsState createState() => _BranchDetailsState();
 }
 
-class _branchDetailsState extends State<branchDetails>
+class _BranchDetailsState extends State<BranchDetails>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   var choices = ['Delete Branch'];
@@ -32,7 +32,7 @@ class _branchDetailsState extends State<branchDetails>
       context: context,
       shape: sheetBorder,
       builder: (context) {
-        return customFilterSheet();
+        return CustomFilterSheet();
       },
     );
   }
@@ -50,7 +50,7 @@ class _branchDetailsState extends State<branchDetails>
           context: context,
           barrierDismissible: true,
           builder: (context) {
-            return customAlertDialogMaster(
+            return CustomAlertDialogMaster(
               branch: widget.snapshot.id,
               money: value,
             );
@@ -61,7 +61,7 @@ class _branchDetailsState extends State<branchDetails>
           context: context,
           barrierDismissible: true,
           builder: (context) {
-            return customAlertDialogBranch(
+            return CustomAlertDialogBranch(
               branch: widget.snapshot.id,
               money: value,
             );
@@ -73,11 +73,11 @@ class _branchDetailsState extends State<branchDetails>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final provider = Provider.of<AppProvider>(context);
@@ -121,7 +121,7 @@ class _branchDetailsState extends State<branchDetails>
             },
             itemBuilder: (context) {
               return choices.map(
-                    (String choice) {
+                (String choice) {
                   return PopupMenuItem(
                     value: choice,
                     child: Text(choice),
@@ -210,7 +210,7 @@ class _branchDetailsState extends State<branchDetails>
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return payNow(widget.snapshot);
+                      return PayNow(widget.snapshot);
                     },
                   ),
                 );
@@ -264,7 +264,7 @@ class _branchDetailsState extends State<branchDetails>
           SizedBox(
             height: size.height / 80,
           ),
-          transactionPage(
+          TransactionPage(
             widget.snapshot.id,
             provider.transactionIndex,
           ),
@@ -274,6 +274,5 @@ class _branchDetailsState extends State<branchDetails>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

@@ -82,7 +82,7 @@ class _BranchesState extends State<Branches> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return branchDetails(
+                                    return BranchDetails(
                                       snapshot: snapshot.data[index],
                                       gradientContainer:
                                       grads[index % (grads.length)],

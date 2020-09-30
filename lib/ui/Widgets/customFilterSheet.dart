@@ -2,12 +2,12 @@ import 'package:bank_management/provider/AppProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class customFilterSheet extends StatefulWidget {
+class CustomFilterSheet extends StatefulWidget {
   @override
-  _customFilterSheetState createState() => _customFilterSheetState();
+  _CustomFilterSheetState createState() => _CustomFilterSheetState();
 }
 
-class _customFilterSheetState extends State<customFilterSheet> {
+class _CustomFilterSheetState extends State<CustomFilterSheet> {
   var titleType = ['All', 'Credit', 'Debit'];
 
   @override

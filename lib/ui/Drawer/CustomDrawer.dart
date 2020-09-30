@@ -123,7 +123,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return transfer();
+                    return Transfer();
                   },
                 ),
               );

@@ -3,12 +3,12 @@ import 'package:bank_management/provider/AppProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class transactionFrom extends StatefulWidget {
+class TransactionFrom extends StatefulWidget {
   @override
-  _transactionFromState createState() => _transactionFromState();
+  _TransactionFromState createState() => _TransactionFromState();
 }
 
-class _transactionFromState extends State<transactionFrom> {
+class _TransactionFromState extends State<TransactionFrom> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppProvider>(context);

@@ -4,18 +4,18 @@ import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class customAlertDialogMaster extends StatefulWidget {
+class CustomAlertDialogMaster extends StatefulWidget {
   final String branch;
   final int money;
 
-  customAlertDialogMaster({this.branch, this.money});
+  CustomAlertDialogMaster({this.branch, this.money});
 
   @override
-  _customAlertDialogMasterState createState() =>
-      _customAlertDialogMasterState();
+  _CustomAlertDialogMasterState createState() =>
+      _CustomAlertDialogMasterState();
 }
 
-class _customAlertDialogMasterState extends State<customAlertDialogMaster> {
+class _CustomAlertDialogMasterState extends State<CustomAlertDialogMaster> {
   TextEditingController amountController = TextEditingController();
   var _fkey = GlobalKey<FormState>();
 

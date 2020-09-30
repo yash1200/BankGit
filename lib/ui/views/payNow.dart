@@ -4,16 +4,16 @@ import 'package:bank_management/utils/Style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class payNow extends StatefulWidget {
+class PayNow extends StatefulWidget {
   final DocumentSnapshot snapshot;
 
-  payNow(this.snapshot);
+  PayNow(this.snapshot);
 
   @override
-  _payNowState createState() => _payNowState();
+  _PayNowState createState() => _PayNowState();
 }
 
-class _payNowState extends State<payNow> {
+class _PayNowState extends State<PayNow> {
   TextEditingController amountController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -24,7 +24,7 @@ class _payNowState extends State<payNow> {
       context: context,
       shape: sheetBorder,
       builder: (context) {
-        return paymentSheet(
+        return PaymentSheet(
           amount: amountController.text,
           phone: phoneController.text,
           description: descriptionController.text,
@@ -74,7 +74,7 @@ class _payNowState extends State<payNow> {
                   height: size.height / 40,
                 ),
                 Text(
-                  'From: ${widget.snapshot.documentID}',
+                  'From: ${widget.snapshot.id}',
                   style: TextStyle(
                     color: darkColor,
                     fontWeight: FontWeight.w500,
