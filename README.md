@@ -1,10 +1,10 @@
 # Bank Git
 
+Web Hosted Here : https://bank-management-45848.web.app/
+
 Bank Git is an application built with Flutter and Firebase to help you manage your bank account in a more efficient way.
 
 Bank Git breaks your bank account into multiple branches, which you will define according to your preferencess and the total money in your account will be managed under `master` branch.
-
-It is just like `git`, just modified to work efficiently for your bank account.
 
 Operations suppported on a branch :
 
