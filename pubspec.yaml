@@ -1,5 +1,5 @@
 name: bank_management
-description: A new Flutter application.
+description: BankGit helps you manage your account and transactions more efficiently by breaking your account into branches for various purposes and then making transactions directly from them.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
