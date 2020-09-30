@@ -63,9 +63,6 @@ Future<void> verifyPhoneNumberForWeb(String phone) async {
   FirebaseAuth auth = FirebaseAuth.instance;
   confirmationResult = await auth.signInWithPhoneNumber(
     "+91" + phone,
-    RecaptchaVerifier(
-      container: 'recaptcha',
-    ),
   );
 }
 
