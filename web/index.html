@@ -1,56 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter application.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta
+      name="description"
+      content="BankGit helps you manage your account and transactions more efficiently by breaking your account into branches for various purposes and then making transactions directly from them."
+    />
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="bank_management">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="bank_management" />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>bank_management</title>
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
+    <title>bank_management</title>
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js');
-      });
-    }
-  </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("flutter_service_worker.js");
+        });
+      }
+    </script>
 
-  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
-  <script>
-    var firebaseConfig = {
-      apiKey: "AIzaSyCjw8hP-aTGzA0BYzV5Rvd1cOvdX1WtbZM",
-      authDomain: "bank-management-45848.firebaseapp.com",
-      databaseURL: "https://bank-management-45848.firebaseio.com",
-      projectId: "bank-management-45848",
-      storageBucket: "bank-management-45848.appspot.com",
-      messagingSenderId: "98256588908",
-      appId: "1:98256588908:web:428875952ddf348ffd0849",
-      measurementId: "G-VW03KMGVRP"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-  </script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyCjw8hP-aTGzA0BYzV5Rvd1cOvdX1WtbZM",
+        authDomain: "bank-management-45848.firebaseapp.com",
+        databaseURL: "https://bank-management-45848.firebaseio.com",
+        projectId: "bank-management-45848",
+        storageBucket: "bank-management-45848.appspot.com",
+        messagingSenderId: "98256588908",
+        appId: "1:98256588908:web:428875952ddf348ffd0849",
+        measurementId: "G-VW03KMGVRP",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
 
-  <script src="main.dart.js" type="application/javascript"></script>
-  
-</body>
+    <script src="main.dart.js" type="application/javascript"></script>
+  </body>
 </html>
