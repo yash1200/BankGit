@@ -165,10 +165,12 @@ class _UserProfileState extends State<UserProfile> {
               if (snapshot.hasData) {
                 return PieChart(
                   dataMap: snapshot.data,
-                  legendStyle: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: darkColor,
+                  legendOptions: LegendOptions(
+                    legendTextStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: darkColor,
+                    ),
                   ),
                   chartRadius: size.width / 2.3,
                   colorList: chartColor,

@@ -70,14 +70,16 @@ class _HomePageState extends State<HomePage> {
                     if (snapshot.hasData) {
                       return PieChart(
                         dataMap: snapshot.data,
-                        legendStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: darkColor,
-                        ),
+                        initialAngleInDegree: 0,
                         chartRadius: size.width / 2.3,
-                        initialAngle: 0,
                         colorList: chartColor,
+                        legendOptions: LegendOptions(
+                          legendTextStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: darkColor,
+                          ),
+                        ),
                       );
                     } else {
                       return Center(
