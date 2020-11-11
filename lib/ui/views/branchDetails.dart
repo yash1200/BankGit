@@ -24,7 +24,6 @@ class BranchDetails extends StatefulWidget {
 
 class _BranchDetailsState extends State<BranchDetails>
     with AutomaticKeepAliveClientMixin {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   var choices = ['Delete Branch'];
 
   showFilterSheet(BuildContext context) {
@@ -38,7 +37,7 @@ class _BranchDetailsState extends State<BranchDetails>
   }
 
   showAddSheet(BuildContext context) {
-    scaffoldKey.currentState.showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Getting data'),
         duration: Duration(seconds: 1),
@@ -82,7 +81,6 @@ class _BranchDetailsState extends State<BranchDetails>
     var size = MediaQuery.of(context).size;
     final provider = Provider.of<AppProvider>(context);
     return Scaffold(
-      key: scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,

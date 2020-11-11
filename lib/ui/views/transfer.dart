@@ -39,8 +39,8 @@ class _TransferState extends State<Transfer> {
     );
   }
 
-  void _showSnackBarLocal(String text) {
-    _scaffoldKey.currentState.showSnackBar(
+  void _showSnackBarLocal(String text, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(text),
         duration: _duration,
@@ -239,12 +239,19 @@ class _TransferState extends State<Transfer> {
                   if (provider.transactionTo == provider.transactionFrom &&
                       provider.transactionTo != 'Not Selected') {
                     _showSnackBarLocal(
-                        "Transaction from and to fields are same");
+                      "Transaction from and to fields are same",
+                      context,
+                    );
                   } else if (provider.transactionTo == 'Not Selected') {
-                    _showSnackBarLocal("Transaction to field is not selected");
+                    _showSnackBarLocal(
+                      "Transaction to field is not selected",
+                      context,
+                    );
                   } else if (provider.transactionFrom == 'Not Selected') {
                     _showSnackBarLocal(
-                        "Transaction from field is not selected");
+                      "Transaction from field is not selected",
+                      context,
+                    );
                   }
                 }
               },

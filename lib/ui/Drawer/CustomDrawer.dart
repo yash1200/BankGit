@@ -23,7 +23,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
     Navigator.pop(context);
     showDialog(
       context: context,
-      child: LogOutDialog(),
+      builder: (context) {
+        return LogOutDialog();
+      },
     );
   }
 
