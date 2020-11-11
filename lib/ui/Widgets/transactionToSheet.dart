@@ -18,19 +18,20 @@ class _TransactionToState extends State<TransactionTo> {
         if (snapshot.hasData) {
           return ListView.builder(
             shrinkWrap: true,
-            itemCount: snapshot.data.length,
+            itemCount: (snapshot.data! as List).length,
             itemBuilder: (context, index) {
-              if (snapshot.data[index].documentID != 'master') {
+              if ((snapshot.data! as List)[index].documentID != 'master') {
                 return RadioListTile(
                   value: index,
                   groupValue: provider.transactionToIndex,
                   onChanged: (index) {
                     provider.setTransactionToIndex(index);
-                    provider.setTransactionTo(snapshot.data[index].documentID);
+                    provider.setTransactionTo(
+                        (snapshot.data! as List)[index as int].documentID);
                     Navigator.pop(context);
                   },
                   title: Text(
-                    snapshot.data[index].documentID,
+                    (snapshot.data! as List)[index].documentID,
                     style: TextStyle(
                       fontWeight: index == provider.transactionToIndex
                           ? FontWeight.w400

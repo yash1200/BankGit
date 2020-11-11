@@ -17,7 +17,7 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
-  MyUser user;
+  MyUser? user;
 
   _showSignOutDialog(BuildContext context) {
     Navigator.pop(context);
@@ -50,8 +50,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
               );
             },
             child: UserAccountsDrawerHeader(
-              accountName: Text(user.name),
-              accountEmail: Text(user.email),
+              accountName: Text(user!.name),
+              accountEmail: Text(user!.email),
               currentAccountPicture: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -59,7 +59,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  user.name[0].toUpperCase(),
+                  user!.name[0].toUpperCase(),
                   style: defaultTextStyle,
                 ),
               ),

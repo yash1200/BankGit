@@ -59,7 +59,7 @@ class _CreateBranchState extends State<CreateBranch> {
                       border: outlineInputBorder,
                     ),
                     validator: (value) {
-                      if (value.isEmpty) {
+                      if (value!.isEmpty) {
                         return 'Name can\'t be empty';
                       } else if (value.length > 10) {
                         return 'Minimum length for name is 10';
@@ -81,7 +81,7 @@ class _CreateBranchState extends State<CreateBranch> {
                       border: outlineInputBorder,
                     ),
                     validator: (value) {
-                      if (value.isEmpty) {
+                      if (value!.isEmpty) {
                         return "Description can\'t be empty";
                       }
                       return null;
@@ -92,7 +92,7 @@ class _CreateBranchState extends State<CreateBranch> {
                   ),
                   FlatButton(
                     onPressed: () {
-                      if (_fKey.currentState.validate()) {
+                      if (_fKey.currentState!.validate()) {
                         createBranch(nameController.text, desController.text);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

@@ -10,7 +10,7 @@ import '../model/user.dart';
 
 import 'package:flutter/foundation.dart';
 
-ConfirmationResult confirmationResult;
+late ConfirmationResult confirmationResult;
 
 Future<void> verifyNumber(String phone, BuildContext context) async {
   if (!kIsWeb) {
@@ -83,9 +83,7 @@ Future<bool> signInWithPhoneNumber(String otp, String verificationId) async {
     );
     final UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
-    final User user = userCredential.user;
-    final User currentUser = FirebaseAuth.instance.currentUser;
-    assert(user.uid == currentUser.uid);
+    final User? user = userCredential.user;
     if (user != null) {
       return true;
     } else {
@@ -101,7 +99,7 @@ Future<bool> signInWithPhoneNumber(String otp, String verificationId) async {
 /// For web users.
 Future<bool> signInWithPhoneNumberForWeb(String otp) async {
   UserCredential userCredential = await confirmationResult.confirm(otp);
-  final User user = userCredential.user;
+  final User? user = userCredential.user;
   if (user != null) {
     return true;
   } else {
@@ -194,7 +192,7 @@ Future<int> getAddAmount() async {
     if (documents[i].id == 'Master') {
       maxAmount = documents[i].data()['balance'];
     } else {
-      addAmount += documents[i].data()['balance'];
+      addAmount += documents[i].data()['balance'] as int;
     }
   }
   return maxAmount - addAmount;

@@ -19,7 +19,7 @@ class AddDetails extends StatefulWidget {
 class _AddDetailsState extends State<AddDetails> {
   var fkey = GlobalKey<FormState>();
   bool isLoading = false;
-  String uid;
+  late String uid;
   String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))'
       r'@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+'
       r'\.)+[a-zA-Z]{2,}))$';
@@ -78,7 +78,7 @@ class _AddDetailsState extends State<AddDetails> {
                           textCapitalization: TextCapitalization.words,
                           controller: nameController,
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Name can\'be empty';
                             }
                             return null;
@@ -91,7 +91,7 @@ class _AddDetailsState extends State<AddDetails> {
                           ),
                           controller: emailController,
                           validator: (value) {
-                            if (value.isEmpty) {
+                            if (value!.isEmpty) {
                               return 'Email can\'be empty';
                             }
                             return null;
@@ -100,7 +100,7 @@ class _AddDetailsState extends State<AddDetails> {
                       ],
                     ),
                     onTap: () {
-                      if (fkey.currentState.validate()) {
+                      if (fkey.currentState!.validate()) {
                         register(context);
                       }
                     },

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CustomAlertDialogMaster extends StatefulWidget {
-  final String branch;
-  final int money;
+  final String? branch;
+  final int? money;
 
   CustomAlertDialogMaster({this.branch, this.money});
 
@@ -50,11 +50,11 @@ class _CustomAlertDialogMasterState extends State<CustomAlertDialogMaster> {
                 ),
               ),
               validator: (value) {
-                if (value.isEmpty) {
+                if (value!.isEmpty) {
                   return 'Amount can\'t be empty';
                 } else if (int.parse(value) == 0) {
                   return 'Amount can\'t be zero';
-                } else if (double.parse(value) > widget.money &&
+                } else if (double.parse(value) > widget.money! &&
                     provider.paymentMode == 1) {
                   return 'Amount can\'t be greater than ${widget.money}';
                 }
@@ -123,9 +123,9 @@ class _CustomAlertDialogMasterState extends State<CustomAlertDialogMaster> {
             FlatButton(
               onPressed: () {
                 print(provider.paymentMode);
-                if (_fkey.currentState.validate()) {
+                if (_fkey.currentState!.validate()) {
                   addMoney(
-                    widget.branch,
+                    widget.branch!,
                     int.parse(amountController.text),
                     'Money Added',
                   );

@@ -2,7 +2,7 @@ import 'package:bank_management/model/user.dart';
 import 'package:flutter/material.dart';
 
 class AppProvider with ChangeNotifier {
-  MyUser _user;
+  late MyUser _user;
   int _transactionIndex = 0;
   var _upiType;
   int _paymentMode = 0;

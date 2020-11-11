@@ -64,7 +64,7 @@ class _BranchesState extends State<Branches> {
                       height: size.height / 40,
                     ),
                     GridView.builder(
-                      itemCount: snapshot.data.length,
+                      itemCount: (snapshot.data! as List).length,
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
@@ -75,7 +75,7 @@ class _BranchesState extends State<Branches> {
                       ),
                       itemBuilder: (context, index) {
                         return Hero(
-                          tag: snapshot.data[index].documentID,
+                          tag: (snapshot.data! as List)[index].documentID,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -83,9 +83,9 @@ class _BranchesState extends State<Branches> {
                                 MaterialPageRoute(
                                   builder: (context) {
                                     return BranchDetails(
-                                      snapshot: snapshot.data[index],
+                                      snapshot: (snapshot.data! as List)[index],
                                       gradientContainer:
-                                      grads[index % (grads.length)],
+                                          grads[index % (grads.length)],
                                     );
                                   },
                                 ),
@@ -110,7 +110,7 @@ class _BranchesState extends State<Branches> {
                                     height: 10,
                                   ),
                                   Text(
-                                    snapshot.data[index].documentID,
+                                    (snapshot.data! as List)[index].documentID,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 25,

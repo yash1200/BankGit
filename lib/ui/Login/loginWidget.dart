@@ -2,10 +2,10 @@ import 'package:bank_management/utils/Style.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatefulWidget {
-  final Widget textField;
-  final String title;
-  final String subtitle;
-  final VoidCallback onTap;
+  final Widget? textField;
+  final String? title;
+  final String? subtitle;
+  final VoidCallback? onTap;
   final bool isLoading;
 
   LoginWidget({
@@ -34,7 +34,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           height: size.height / 2,
           width: size.width,
           child: Text(
-            widget.title,
+            widget.title!,
             style: TextStyle(
               color: Colors.white,
               fontSize: 50,
@@ -44,7 +44,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         SizedBox(
           height: size.height * 0.06,
         ),
-        widget.textField,
+        widget.textField!,
         SizedBox(
           height: size.height * 0.06,
         ),
@@ -52,7 +52,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Text(
-              widget.subtitle,
+              widget.subtitle!,
               style: TextStyle(
                 color: darkColor,
                 fontSize: 25,

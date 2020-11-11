@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class LoginProvider with ChangeNotifier {
   bool _isLoggedIn = false;
-  String _verificationId;
+  late String _verificationId;
 
   bool get getIsLoggedIn => _isLoggedIn;
 

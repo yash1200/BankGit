@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_upi/flutter_upi.dart';
 
 class PaymentSheet extends StatefulWidget {
-  final String amount;
-  final String phone;
-  final String description;
-  final String branch;
+  final String? amount;
+  final String? phone;
+  final String? description;
+  final String? branch;
 
   PaymentSheet({this.amount, this.phone, this.description, this.branch});
 
@@ -46,11 +46,11 @@ class _PaymentSheetState extends State<PaymentSheet> {
                 onTap: () {
                   Navigator.pop(context);
                   makeUpiPayment(
-                    widget.amount,
-                    widget.phone,
+                    widget.amount!,
+                    widget.phone!,
                     upiVendor[index],
-                    widget.description,
-                    widget.branch,
+                    widget.description!,
+                    widget.branch!,
                   );
                   Navigator.pop(context);
                 },
