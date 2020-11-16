@@ -35,7 +35,7 @@ Future<void> verifyPhoneNumber(String phone, BuildContext context) async {
       (FirebaseAuthException authException) {};
 
   final PhoneCodeSent codeSent =
-      (String verificationId, [int? forceResendingToken]) async {
+      (String verificationId, [int forceResendingToken]) async {
     _verificationId = verificationId;
     print("Verification ID: " + verificationId);
     provider.setVerificationId(verificationId);
