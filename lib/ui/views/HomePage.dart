@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return PieChart(
-                        dataMap: (snapshot.data! as Map).cast<String, double>(),
+                        dataMap: snapshot.data,
                         initialAngleInDegree: 0,
                         chartRadius: size.width / 2.3,
                         colorList: chartColor,

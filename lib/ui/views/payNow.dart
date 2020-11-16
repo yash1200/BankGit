@@ -87,7 +87,7 @@ class _PayNowState extends State<PayNow> {
                 TextFormField(
                   controller: phoneController,
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value.isEmpty) {
                       return 'Number can\'t be empty';
                     } else if (value.length != 10) {
                       return 'Number is invalid';
@@ -107,7 +107,7 @@ class _PayNowState extends State<PayNow> {
                 TextFormField(
                   controller: amountController,
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value.isEmpty) {
                       return 'Amount can\'t be empty';
                     } else if (double.parse(value) >
                         widget.snapshot.data()['balance']) {
@@ -128,7 +128,7 @@ class _PayNowState extends State<PayNow> {
                 TextFormField(
                   controller: descriptionController,
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value.isEmpty) {
                       return 'Payment Description Needed';
                     } else if (value.length > 15) {
                       return 'Payment Description Large';
@@ -146,7 +146,7 @@ class _PayNowState extends State<PayNow> {
                 ),
                 FlatButton(
                   onPressed: () {
-                    if (_fkey.currentState!.validate()) {
+                    if (_fkey.currentState.validate()) {
                       showSheet(context);
                     }
                   },

@@ -186,7 +186,7 @@ class _TransferState extends State<Transfer> {
             TextFormField(
               controller: amountController,
               validator: (value) {
-                if (value!.isEmpty) {
+                if (value.isEmpty) {
                   return 'Enter Some amount';
                 } else if (int.parse(value) > provider.transactionFromBalance) {
                   print(provider.transactionFromBalance);
@@ -195,7 +195,7 @@ class _TransferState extends State<Transfer> {
                 return null;
               },
               onTap: () {
-                _fkey.currentState!.reset();
+                _fkey.currentState.reset();
               },
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
@@ -220,7 +220,7 @@ class _TransferState extends State<Transfer> {
             ),
             FlatButton(
               onPressed: () {
-                if (_fkey.currentState!.validate() &&
+                if (_fkey.currentState.validate() &&
                     provider.transactionFrom != provider.transactionTo &&
                     provider.transactionFrom != 'Not Selected' &&
                     provider.transactionTo != 'Not Selected') {

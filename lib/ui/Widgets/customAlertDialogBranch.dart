@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CustomAlertDialogBranch extends StatefulWidget {
-  final String? branch;
-  final int? money;
+  final String branch;
+  final int money;
 
   CustomAlertDialogBranch({this.branch, this.money});
 
@@ -51,11 +51,11 @@ class _CustomAlertDialogBranchState extends State<CustomAlertDialogBranch> {
               ),
               validator: (value) {
                 print("Mpney "+widget.money.toString());
-                if (value!.isEmpty) {
+                if (value.isEmpty) {
                   return 'Amount can\'t be empty';
                 } else if (int.parse(value) == 0) {
                   return 'Amount can\'t be zero';
-                } else if (double.parse(value) > widget.money!) {
+                } else if (double.parse(value) > widget.money) {
                   return 'Amount can\'t be greater than ${widget.money}';
                 }
                 return null;
@@ -125,16 +125,16 @@ class _CustomAlertDialogBranchState extends State<CustomAlertDialogBranch> {
             ),
             FlatButton(
               onPressed: () {
-                if (_fkey.currentState!.validate()) {
+                if (_fkey.currentState.validate()) {
                   if (provider.paymentMode == 0) {
                     addMoney(
-                      widget.branch!,
+                      widget.branch,
                       int.parse(amountController.text),
                       'Money Credited',
                     );
                   } else {
                     debitMoney(
-                      widget.branch!,
+                      widget.branch,
                       int.parse(amountController.text),
                       'Money Debited',
                     );

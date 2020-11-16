@@ -13,8 +13,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class BranchDetails extends StatefulWidget {
-  final DocumentSnapshot? snapshot;
-  final Gradient? gradientContainer;
+  final DocumentSnapshot snapshot;
+  final Gradient gradientContainer;
 
   BranchDetails({this.snapshot, this.gradientContainer});
 
@@ -44,13 +44,13 @@ class _BranchDetailsState extends State<BranchDetails>
       ),
     );
     getAddAmount().then((value) {
-      if (widget.snapshot!.id == 'Master') {
+      if (widget.snapshot.id == 'Master') {
         showDialog(
           context: context,
           barrierDismissible: true,
           builder: (context) {
             return CustomAlertDialogMaster(
-              branch: widget.snapshot!.id,
+              branch: widget.snapshot.id,
               money: value,
             );
           },
@@ -61,7 +61,7 @@ class _BranchDetailsState extends State<BranchDetails>
           barrierDismissible: true,
           builder: (context) {
             return CustomAlertDialogBranch(
-              branch: widget.snapshot!.id,
+              branch: widget.snapshot.id,
               money: value,
             );
           },
@@ -95,7 +95,7 @@ class _BranchDetailsState extends State<BranchDetails>
           },
         ),
         title: Text(
-          widget.snapshot!.id,
+          widget.snapshot.id,
           style: TextStyle(
             color: darkColor,
           ),
@@ -110,7 +110,7 @@ class _BranchDetailsState extends State<BranchDetails>
             onSelected: (value) {
               switch (value) {
                 case 'Delete Branch':
-                  deleteBranch(widget.snapshot!.id);
+                  deleteBranch(widget.snapshot.id);
                   Navigator.pop(context);
                   break;
                 default:
@@ -139,7 +139,7 @@ class _BranchDetailsState extends State<BranchDetails>
             height: size.height / 40,
           ),
           Hero(
-            tag: widget.snapshot!.id,
+            tag: widget.snapshot.id,
             child: Container(
               height: size.height / 5,
               padding: EdgeInsets.all(10),
@@ -162,7 +162,7 @@ class _BranchDetailsState extends State<BranchDetails>
                         width: 5,
                       ),
                       FutureBuilder(
-                        future: getBranchBalance(widget.snapshot!.id),
+                        future: getBranchBalance(widget.snapshot.id),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Text(
@@ -208,7 +208,7 @@ class _BranchDetailsState extends State<BranchDetails>
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return PayNow(widget.snapshot!);
+                      return PayNow(widget.snapshot);
                     },
                   ),
                 );
@@ -263,7 +263,7 @@ class _BranchDetailsState extends State<BranchDetails>
             height: size.height / 80,
           ),
           TransactionPage(
-            widget.snapshot!.id,
+            widget.snapshot.id,
             provider.transactionIndex,
           ),
         ],

@@ -19,7 +19,7 @@ class _TransactionPageState extends State<TransactionPage> {
       future: getTransactionList(widget.branch, widget.type),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          if ((snapshot.data! as List).length == 0) {
+          if (snapshot.data.length == 0) {
             return Center(
               child: Text('No Transactions done'),
             );
@@ -27,20 +27,20 @@ class _TransactionPageState extends State<TransactionPage> {
             return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: (snapshot.data! as List).length,
+              itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                    (snapshot.data! as List)[index].data()['desc'],
+                    snapshot.data[index].data()['desc'],
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 18,
                     ),
                   ),
                   subtitle: Text(
-                    'Balance: ${(snapshot.data! as List)[index].data()['balance'].toString()}'
-                    '(${(snapshot.data! as List)[index].data()['type'] == 1 ? '+' : '-'}'
-                    '${(snapshot.data! as List)[index].data()['amount'].toString()})',
+                    'Balance: ${snapshot.data[index].data()['balance'].toString()}'
+                    '(${snapshot.data[index].data()['type'] == 1 ? '+' : '-'}'
+                    '${snapshot.data[index].data()['amount'].toString()})',
                     style: TextStyle(
                       fontWeight: FontWeight.w300,
                     ),
@@ -50,25 +50,18 @@ class _TransactionPageState extends State<TransactionPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        (snapshot.data! as List)[index]
-                            .data()['amount']
-                            .toString(),
+                        snapshot.data[index].data()['amount'].toString(),
                         style: TextStyle(
                           fontSize: 18,
-                          color:
-                              (snapshot.data! as List)[index].data()['type'] ==
-                                      1
-                                  ? Colors.green
-                                  : Colors.redAccent,
+                          color: snapshot.data[index].data()['type'] == 1
+                              ? Colors.green
+                              : Colors.redAccent,
                         ),
                       ),
                       Text(
                         DateFormat.MMMd()
-                            .format(
-                              DateTime.fromMillisecondsSinceEpoch(
-                                (snapshot.data! as List)[index].data()['time'],
-                              ),
-                            )
+                            .format(DateTime.fromMillisecondsSinceEpoch(
+                                snapshot.data[index].data()['time']))
                             .toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.w300,

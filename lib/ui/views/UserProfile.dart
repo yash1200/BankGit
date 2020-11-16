@@ -164,7 +164,7 @@ class _UserProfileState extends State<UserProfile> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return PieChart(
-                  dataMap: (snapshot.data! as Map).cast<String, double>(),
+                  dataMap: snapshot.data,
                   legendOptions: LegendOptions(
                     legendTextStyle: TextStyle(
                       fontSize: 16,

@@ -22,7 +22,7 @@ class _CustomFilterSheetState extends State<CustomFilterSheet> {
             value: index,
             groupValue: provider.transactionIndex,
             onChanged: (index) {
-              provider.setTransactionIndex(index as int);
+              provider.setTransactionIndex(index);
               Navigator.pop(context);
             },
             title: Text(

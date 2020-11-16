@@ -45,14 +45,14 @@ class _LoginState extends State<Login> {
                       controller: phoneNumberController,
                       keyboardType: TextInputType.number,
                       validator: (value) {
-                        if (value!.length != 10) {
+                        if (value.length != 10) {
                           return 'Invalid Number';
                         }
                         return null;
                       },
                     ),
                     onTap: () {
-                      if (fkey.currentState!.validate()) {
+                      if (fkey.currentState.validate()) {
                         setState(() {
                           isLoading = true;
                         });

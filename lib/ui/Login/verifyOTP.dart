@@ -82,14 +82,14 @@ class _VerifyOtpState extends State<VerifyOtp> {
                       controller: otpController,
                       keyboardType: TextInputType.number,
                       validator: (value) {
-                        if (value!.length != 6) {
+                        if (value.length != 6) {
                           return 'Invalid OTP';
                         }
                         return null;
                       },
                     ),
                     onTap: () {
-                      if (fkey.currentState!.validate()) {
+                      if (fkey.currentState.validate()) {
                         print("Verifying OTP");
                         enterOTP(context);
                       }
