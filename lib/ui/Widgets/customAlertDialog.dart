@@ -55,7 +55,7 @@ class _CustomAlertDialogMasterState extends State<CustomAlertDialogMaster> {
                 } else if (int.parse(value) == 0) {
                   return 'Amount can\'t be zero';
                 } else if (double.parse(value) > widget.money &&
-                    provider.paymentMode == 1) {
+                    provider.paymentMode == 0) {
                   return 'Amount can\'t be greater than ${widget.money}';
                 }
                 return null;
