@@ -50,12 +50,14 @@ class _CustomAlertDialogBranchState extends State<CustomAlertDialogBranch> {
                 ),
               ),
               validator: (value) {
-                print("Mpney "+widget.money.toString());
+                print(provider.paymentMode);
+                print("Money " + widget.money.toString());
                 if (value.isEmpty) {
                   return 'Amount can\'t be empty';
                 } else if (int.parse(value) == 0) {
                   return 'Amount can\'t be zero';
-                } else if (double.parse(value) > widget.money) {
+                } else if (provider.paymentMode == 0 &&
+                    double.parse(value) > widget.money) {
                   return 'Amount can\'t be greater than ${widget.money}';
                 }
                 return null;
@@ -137,6 +139,11 @@ class _CustomAlertDialogBranchState extends State<CustomAlertDialogBranch> {
                       widget.branch,
                       int.parse(amountController.text),
                       'Money Debited',
+                    );
+                    debitMoney(
+                      'Master',
+                      int.parse(amountController.text),
+                      'Money Debited from ${widget.branch}',
                     );
                   }
                   Navigator.pop(context);
